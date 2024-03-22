@@ -109,115 +109,69 @@ func Mkusr(userNew string, passNew string, grupoValidar string) {
 				// tamanio := len(lines)
 
 				ExisteUser := false
+				ExisteGrupo := false
 				// Iterar a través de las líneas
-				// count := 0
-				//Lista aux para incorporar usuarios
-				UsuariosPorGrupo := make(map[string][]Structs.UserTXT)
-
-				for _, linea := range lines {
+				countUser := 0
+				posicionGrupo := 0
+				for i, linea := range lines {
 					fields := strings.Split(linea, ",")
 					// Obtener los datos del usuario
-					if len(fields) == 5 {
-
-						Id := fields[0]
-						Tipo := fields[1]
-						Grupo := fields[2]
-						User := fields[3]
-						Pass := fields[4]
-
-						// Verificar si el grupo existe
-						_, ok := UsuariosPorGrupo[Grupo]
-						if !ok {
-							// Crear una nueva entrada para el grupo
-							UsuariosPorGrupo[Grupo] = make([]Structs.UserTXT, 0)
+					Grupo := fields[2]
+					if len(fields) == 3 {
+						if Grupo == grupoValidar {
+							//Existe grupo
+							ExisteGrupo = true
+							posicionGrupo = i
 						}
+					}
+					if ExisteGrupo {
+						if Grupo == grupoValidar {
+							if len(fields) == 5 {
 
-						// Verificar si el usuario ya existe en el grupo
-						usuarioExiste := false
-						for _, usuarioExistente := range UsuariosPorGrupo[Grupo] {
-							if usuarioExistente.User == User {
-								usuarioExiste = true
-								break
+								countUser += 1
+								User := fields[3]
+								if User == userNew {
+									//Usuario ya existe
+									fmt.Println("Error: Usuario ya existe -MKUSR")
+									ExisteUser = true
+								}
+
+							} else { //PEro no tiene usuarios aun
+								countUser = 1
 							}
 						}
-
-						// Si el usuario no existe en el grupo, agregarlo
-						if !usuarioExiste {
-							usuario := Structs.UserTXT{Id, Tipo, Grupo, User, Pass}
-							UsuariosPorGrupo[Grupo] = append(UsuariosPorGrupo[Grupo], usuario)
-						}
-
-					} else {
-						// count += 1
-						// if count == tamanio-1 {
-						// 	break
-						// }
-						grupo := fields[2]
-
-						_, ok := UsuariosPorGrupo[grupo]
-						if !ok {
-							// Crear una nueva entrada para el grupo
-							UsuariosPorGrupo[grupo] = make([]Structs.UserTXT, 0)
-						}
 					}
 
 				}
-
-				//verificar si en esos grupo existe el nuevo
-				_, ok1 := UsuariosPorGrupo[grupoValidar]
-				if ok1 { //existe grupo a ingresar
-					// Verificar si el usuario ya existe en el grupo
-
-					usuarioExiste := false
-					for _, usuarioExistente := range UsuariosPorGrupo[grupoValidar] {
-						if usuarioExistente.User == userNew {
-							usuarioExiste = true
-							break
-						}
-					}
-
-					// Si el usuario no existe en el grupo, agregarlo
-					if !usuarioExiste {
-						usuario := Structs.UserTXT{"0", "U", grupoValidar, userNew, passNew}
-						UsuariosPorGrupo[grupoValidar] = append(UsuariosPorGrupo[grupoValidar], usuario)
-					} else {
-						ExisteUser = true
-						fmt.Println("Error: Usuario ya existe, -mkusr")
-						fmt.Println("===== END mkgrp =====")
-						return
-					}
-
-				} else {
-
-					fmt.Println("Error: grupo NO existe")
-					fmt.Println("===== END mkgrp =====")
-					return
-
-				}
-				// if !ExisteGrupo {
-				// 	fmt.Println("Error: No existe grupo al que se quiere insertar usuario")
-				// 	fmt.Println("===== END Mkusr ======")
-				// 	return
-				// }
 
 				if !ExisteUser { //No existe el usuario
-					newData := ""
-					countGrupo := 0
-					countUser := 0
-					for grupo, usuarios := range UsuariosPorGrupo {
-						countGrupo += 1
-						correlativo := strconv.Itoa(countGrupo)
-						newData += correlativo + ",G," + grupo + "\n"
-						//cada usuario
-						for _, usuario := range usuarios {
-							countUser += 1
-							correlativo1 := strconv.Itoa(countUser)
-							newData += correlativo1 + ",U," + grupo + "," + usuario.User + "," + usuario.Pass + "\n"
-						}
+					correlativo := strconv.Itoa(countUser)
+					insert := countUser + posicionGrupo
+					fmt.Println("Cantidad de usuar", countUser)
+					//Partes
+
+					primeraParte := lines[:insert]
+					segundaParte := lines[insert:]
+
+					fmt.Println("Index a cortar: ", insert)
+
+					lastLine := ""
+					for _, line := range segundaParte {
+						lastLine += line + "\n"
 					}
-					fmt.Println("##### new data antes de insr\n", newData)
+
+					nuevaLinea := append(primeraParte, correlativo+",U,"+grupoValidar+","+userNew+","+passNew)
+
+					lastLine = strings.TrimSuffix(lastLine, "\n")
+					lines = append(nuevaLinea, lastLine)
+
+					newData := ""
+					for _, line := range lines {
+						newData += line + "\n"
+					}
 					newData = strings.TrimSuffix(newData, "\n")
-					fmt.Println("##### new data apposr\n", newData)
+
+					fmt.Println("Lo que va a escribir:", newData)
 					//Insertarlo en la estructura
 					if len(newData) > 64 {
 
@@ -244,7 +198,7 @@ func Mkusr(userNew string, passNew string, grupoValidar string) {
 								var newFileblock Structs.Fileblock
 
 								if len(cadenaRellena)%64 == 0 {
-									fmt.Println("------- resultado\n", cadenaRellena[:64])
+
 									copy(newFileblock.B_content[:], cadenaRellena[:64])
 									cadenaRellena = strings.TrimPrefix(cadenaRellena, cadenaRellena[:64])
 								} else {
@@ -276,7 +230,7 @@ func Mkusr(userNew string, passNew string, grupoValidar string) {
 						var Fileblock Structs.Fileblock
 						// no_bloque := tempSuperblock.S_blocks_count - tempSuperblock.S_free_blocks_count
 						//Se inserta en el mismo fileblock
-						fmt.Print("se escribe:", newData)
+
 						// fmt.Print("El bloque es:,", no_bloque-1)
 						copy(Fileblock.B_content[:], newData)
 

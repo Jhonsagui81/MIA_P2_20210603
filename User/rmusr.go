@@ -6,7 +6,6 @@ import (
 	"PROYECTO1_MIA/Utilities"
 	"encoding/binary"
 	"fmt"
-	"strconv"
 	"strings"
 )
 
@@ -103,97 +102,43 @@ func Rmusr(userNew string) {
 				// Dividir la cadena en líneas
 				lines := strings.Split(data, "\n")
 
-				UsuariosPorGrupo := make(map[string][]Structs.UserTXT)
 				ExisteUser := false
 
-				for _, linea := range lines {
+				for i, linea := range lines {
 					fields := strings.Split(linea, ",")
-
 					// Obtener los datos del usuario
 					if len(fields) == 5 {
-						fmt.Println("len 6")
-						Id := fields[0]
-						Tipo := fields[1]
-						Grupo := fields[2]
-						User := fields[3]
-						Pass := fields[4]
+						id := fields[0]
+						grupo := fields[2]
+						user := fields[3]
+						pass := fields[4]
 
-						// Verificar si el grupo existe
-						_, ok := UsuariosPorGrupo[Grupo]
-						if !ok {
-							// Crear una nueva entrada para el grupo
-							UsuariosPorGrupo[Grupo] = make([]Structs.UserTXT, 0)
-						}
-
-						// Verificar si el usuario ya existe en el grupo
-						usuarioExiste := false
-						for _, usuarioExistente := range UsuariosPorGrupo[Grupo] {
-							if usuarioExistente.User == User {
-								usuarioExiste = true
-								break
+						if user == userNew {
+							//Se encontro el usuario a elimincar
+							if id != "0" {
+								ExisteUser = true
+								lines[i] = "0,U," + grupo + "," + user + "," + pass
+							} else {
+								fmt.Println("Error: usuario ya eliminado")
+								fmt.Println("===== END RMUSR =====")
+								return
 							}
 						}
-
-						// Si el usuario no existe en el grupo, agregarlo
-						if !usuarioExiste {
-							usuario := Structs.UserTXT{Id, Tipo, Grupo, User, Pass}
-							UsuariosPorGrupo[Grupo] = append(UsuariosPorGrupo[Grupo], usuario)
-						}
-					} else {
-						// count += 1
-						// if count == tamanio-1 {
-						// 	break
-						// }
-						grupo := fields[2]
-
-						_, ok := UsuariosPorGrupo[grupo]
-						if !ok {
-							// Crear una nueva entrada para el grupo
-							UsuariosPorGrupo[grupo] = make([]Structs.UserTXT, 0)
-						}
-					}
-
-				}
-
-				for grupo, usuarios := range UsuariosPorGrupo {
-					//cada usuario
-					indiceUsuarui := -1
-					for i, usuario := range usuarios {
-						if usuario.User == userNew {
-							indiceUsuarui = i
-							break
-						}
-
-					}
-
-					if indiceUsuarui >= 0 {
-						nuevosUsuario := append(UsuariosPorGrupo[grupo][:indiceUsuarui], UsuariosPorGrupo[grupo][indiceUsuarui+1:]...)
-						UsuariosPorGrupo[grupo] = nuevosUsuario
-						ExisteUser = true
 					}
 				}
 
 				if ExisteUser {
 					//Si existe el grupo
-					//Buscar la fila donde esta el grupo a eliminar
-
+					//Reconstruir cadena
 					newData := ""
-					countGrupo := 0
-					countUser := 0
-					for grupo, usuarios := range UsuariosPorGrupo {
-						countGrupo += 1
-						correlativo := strconv.Itoa(countGrupo)
-						newData += correlativo + ",G," + grupo + "\n"
-						//cada usuario
-						for _, usuario := range usuarios {
-							countUser += 1
-							correlativo1 := strconv.Itoa(countUser)
-							newData += correlativo1 + ",U," + grupo + "," + usuario.User + "," + usuario.Pass + "\n"
-						}
+					for _, line := range lines {
+						newData += line + "\n"
 					}
 
 					newData = strings.TrimSuffix(newData, "\n")
 					//Insertarlo en la estructura
+					fmt.Print("se escribe:", newData)
+
 					if len(newData) > 64 {
 
 						//se necesitara mas de 1 Fileblock
@@ -219,7 +164,6 @@ func Rmusr(userNew string) {
 								var newFileblock Structs.Fileblock
 
 								if len(cadenaRellena)%64 == 0 {
-									fmt.Println("------- resultado\n", cadenaRellena[:64])
 									copy(newFileblock.B_content[:], cadenaRellena[:64])
 									cadenaRellena = strings.TrimPrefix(cadenaRellena, cadenaRellena[:64])
 								} else {
@@ -251,7 +195,6 @@ func Rmusr(userNew string) {
 						var Fileblock Structs.Fileblock
 						// no_bloque := tempSuperblock.S_blocks_count - tempSuperblock.S_free_blocks_count
 						//Se inserta en el mismo fileblock
-						fmt.Print("se escribe:", newData)
 						// fmt.Print("El bloque es:,", no_bloque-1)
 						copy(Fileblock.B_content[:], newData)
 

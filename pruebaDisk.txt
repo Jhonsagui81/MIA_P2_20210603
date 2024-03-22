@@ -18,8 +18,8 @@ mount -driveletter=A -name=Particion2
 mount -driveletter=A -name=Particion2
 unmount -id=A203
 unmount -id=A203
-rep -id=A103 -path=/home/jhonatan/Documentos/1_USAC/1.Archivos/Proyecto1/MIA_P1_202106003/reports/reporte1.pdf -name=mbr
-rep -id=A103 -path=/home/jhonatan/Documentos/1_USAC/1.Archivos/Proyecto1/MIA_P1_202106003/reports/reporte2.pdf -name=disk
+rep -id=A103 -path=/home/jhonatan/Documentos/jfasjdfa/newProyect/reports/reporte1.pdf -name=mbr
+rep -id=A103 -path=/home/jhonatan/Documentos/jfasjdfa/newProyect/reports/reporte2.pdf -name=disk
 
 mkfs -type=full -id=A103
 login -user=root -pass=123 -id=A103
@@ -28,6 +28,11 @@ login -user=root -pass=123 -id=A103
 login -user=root -pass=123 -id=A103
 mkgrp -name=usuarios
 mkgrp -name=usua7rios
+rmgrp -name=usua7rios
+mkusr -user=userdd1 -pass=1123 -grp=usuarios
 mkusr -user=user1 -pass=1123 -grp=usuarios
-
-
+rmusr -user=user1
+rmusr -user=userdd1
+rmusr -user=userdd1
+rmgrp -name=usuarios
+rmgrp -name=usuarios
