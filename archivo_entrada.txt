@@ -1,0 +1,14 @@
+mkdisk -size=50 -unit=M -fit=FF
+fdisk -type=P -unit=b -name=Part1 -size=10485760 -driveletter=A -fit=BF 
+fdisk -type=P -unit=k -name=Part2 -size=10240 -driveletter=A -fit=BF    
+fdisk -type=P -unit=M -name=Part3 -size=10 -driveletter=A -fit=BF       
+
+
+
+mkusr -user=userdd1 -pass=1123 -grp=usuarios
+mkusr -user=user1 -pass=1123 -grp=usuarios
+rmusr -user=user1
+rmusr -user=userdd1
+rmusr -user=userdd1
+rmgrp -name=usuarios
+rmgrp -name=usuarios

@@ -1,0 +1,33 @@
+mkdisk -size=15 -unit=M
+mkdisk -size=1 -unit=M
+rmdisk -driveletter=B 
+mkdisk -size=3 -unit=M
+
+fdisk -type=P -driveletter=A -unit=M -name=Particion1 -size=1 -fit=bf
+fdisk -driveletter=A -type=e -unit=M -name=Particion2 -size=8
+fdisk -driveletter=A -unit=M -type=P -name=Particion3 -size=1
+fdisk -type=l -driveletter=A -unit=M -size=1 -name=Particion4
+fdisk -type=l -driveletter=A -unit=M -size=1 -name=Par4
+fdisk -type=l -driveletter=A -unit=M -size=1 -name=Pasd
+
+fdisk -delete=full -name=Particion3 -driveletter=A
+
+fdisk -add=-1 -unit=M -driveletter=A -name=Particion2
+mount -driveletter=A -name=Particion1
+mount -driveletter=A -name=Particion2
+mount -driveletter=A -name=Particion2
+unmount -id=A203
+unmount -id=A203
+rep -id=A103 -path=/home/jhonatan/Documentos/1_USAC/1.Archivos/Proyecto1/MIA_P1_202106003/reports/reporte1.pdf -name=mbr
+rep -id=A103 -path=/home/jhonatan/Documentos/1_USAC/1.Archivos/Proyecto1/MIA_P1_202106003/reports/reporte2.pdf -name=disk
+
+mkfs -type=full -id=A103
+login -user=root -pass=123 -id=A103
+logout
+login -user=root -pass=123 -id=A103
+login -user=root -pass=123 -id=A103
+mkgrp -name=usuarios
+mkgrp -name=usua7rios
+mkusr -user=user1 -pass=1123 -grp=usuarios
+
+
