@@ -39,7 +39,7 @@ func Analize() {
 
 		fmt.Println("Command: ", command, "Params: ", params)
 
-		AnalyzeCommnad(command, params)
+		AnalyzeCommnad(strings.ToLower(command), params)
 	}
 }
 

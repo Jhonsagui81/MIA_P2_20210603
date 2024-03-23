@@ -4,6 +4,7 @@ import (
 	global "PROYECTO1_MIA/Global"
 	"PROYECTO1_MIA/Structs"
 	"PROYECTO1_MIA/Utilities"
+	"PROYECTO1_MIA/UtilitiesInodes"
 	"encoding/binary"
 	"fmt"
 	"strconv"
@@ -74,7 +75,7 @@ func Mkgrp(name string) {
 			// initSearch /users.txt -> regresa no Inodo
 			// initSearch -> 1
 			//Mando a bucar el archivo user.txt
-			indexInode := initSearch(file, tempSuperblock, 0, "users.txt")
+			indexInode := UtilitiesInodes.InitSearch("/users.txt", file, tempSuperblock)
 			//file, superbloque, posicion de inodo inicial, archivo/carpeta a buscar
 
 			//recupero el indo en indexInode -> concateno todos sus bloques porque este inode es tipo archivo
@@ -90,16 +91,7 @@ func Mkgrp(name string) {
 				//Falta crear funcion para iterar todos los bloques del inodo archivo y concatenar
 				//Validar apuntadores indirectos
 				//Repuero el bloque del archivo, para obtener la data
-				data := ""
-				for i := 0; i < len(crrInode.I_block); i++ {
-					if crrInode.I_block[i] != -1 {
-						var Fileblock Structs.Fileblock
-						if err := Utilities.ReadObject(file, &Fileblock, int64(tempSuperblock.S_block_start+crrInode.I_block[i]*int32(binary.Size(Structs.Fileblock{})))); err != nil {
-							return
-						}
-						data += strings.TrimRight(string(Fileblock.B_content[:]), "\x00")
-					}
-				}
+				data := UtilitiesInodes.GetInodeFileData(crrInode, file, tempSuperblock)
 
 				// data = data[:len(data)-1]
 				fmt.Println("que trae data:", data+"\n")
@@ -145,7 +137,7 @@ func Mkgrp(name string) {
 
 						//se necesitara mas de 1 Fileblock
 						numFileblock := len(newData) / 64
-						if numFileblock > 11 {
+						if numFileblock > 12 {
 							//Se debera implementar los apuntadores indirectos (pendiente)
 						} else {
 							//solo con apuntadores directos

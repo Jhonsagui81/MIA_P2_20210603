@@ -4,4 +4,4 @@
 *.o
 
 #Ignorar la carpeta de discos
-/MIA
+MIA/

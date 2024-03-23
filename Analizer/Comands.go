@@ -370,6 +370,7 @@ func mkdisk(size int, unit string, fit string) {
 	// Open bin file
 	file, err := Utilities.OpenFile(nombre_archivo)
 	if err != nil {
+		fmt.Println("Error: No se pudo abrir el archivo -MKDISK")
 		return
 	}
 
@@ -398,6 +399,7 @@ func mkdisk(size int, unit string, fit string) {
 
 	// Write object in bin file
 	if err := Utilities.WriteObject(file, newMRB, 0); err != nil {
+		fmt.Println("Error: no se pudo escribir archivo.  -MKDISK")
 		return
 	}
 
