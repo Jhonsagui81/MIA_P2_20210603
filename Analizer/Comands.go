@@ -77,9 +77,37 @@ func rep(name string, path string, id string) {
 			fmt.Println("Error: No existe el disco. rep")
 			return
 		}
+	case "sb":
+		byte_id := []byte(id)
+		valor_disk := string(byte_id[0])
+		fmt.Println(valor_disk)
+
+		text := "digraph G {\n\ta0 [shape=none label=<\n\t<TABLE cellspacing=\"10\" cellpadding=\"10\" style=\"rounded\" bgcolor=\"gray\">\n"
+		text += "\t\t<tr>\n"
+		text += "\t\t\t<td colspan=\"2\">Superbloque</td>\n"
+		text += "\t\t</tr>\n"
+
+		disco := Utilities.BusquedaArchivo(valor_disk)
+		if disco {
+			//Si existe el disco
+			text += reportes.RecorridoSB(valor_disk, id)
+			//Cerrar la estructura
+			text += "</TABLE>>];\n"
+			text += "}"
+
+			Utilities.CrearGrafo(text, pathdot, pathPDF)
+
+			// fmt.Println(text)
+		} else {
+			//no existe
+			fmt.Println("Error: No existe el disco. rep")
+			return
+		}
+
 	default:
 		fmt.Println("Reporte no reconocido")
 	}
+	fmt.Println("===== END rep ======")
 
 }
 

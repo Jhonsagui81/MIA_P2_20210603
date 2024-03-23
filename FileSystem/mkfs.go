@@ -86,6 +86,8 @@ func Mkfs(id string, type_ string, fs_ string) {
 
 	newSuperblock.S_free_blocks_count = 3 * n
 	newSuperblock.S_free_inodes_count = n
+	newSuperblock.S_inode_size = 1 + int32(binary.Size(Structs.Inode{}))
+	newSuperblock.S_block_size = int32(5)
 
 	now_date := time.Now()
 	formattedDate := now_date.Format("2006-01-02")

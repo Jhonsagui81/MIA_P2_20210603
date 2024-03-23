@@ -22,8 +22,8 @@ mkfs -type=full -id=A103 -fs=2fs
 
 #EXT2------------------------------------------------
 #------------------------REPORTES 1----------------
-rep -id=191a -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_sb.pdf" -name=sb
-rep -id=191a -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_tree.pdf" -name=tree
+rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_sb.pdf" -name=sb
+rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_tree.pdf" -name=tree
 
 
 
