@@ -26,11 +26,11 @@ digraph G {
 		</tr>
 		<tr>
 			<td>FechaMontaje</td>
-			<td>2024-03-22</td>
+			<td>2024-03-23</td>
 		</tr>
 		<tr>
 			<td>Fecha Desmontaje</td>
-			<td>2024-03-22</td>
+			<td>2024-03-23</td>
 		</tr>
 		<tr>
 			<td>Cantidad Montaje</td>
@@ -42,11 +42,11 @@ digraph G {
 		</tr>
 		<tr>
 			<td>Inode size</td>
-			<td>0</td>
+			<td>128</td>
 		</tr>
 		<tr>
 			<td>Block size</td>
-			<td>0</td>
+			<td>5</td>
 		</tr>
 		<tr>
 			<td>Primer inodo Libre</td>

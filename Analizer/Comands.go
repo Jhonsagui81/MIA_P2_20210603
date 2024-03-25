@@ -103,7 +103,33 @@ func rep(name string, path string, id string) {
 			fmt.Println("Error: No existe el disco. rep")
 			return
 		}
+	case "tree":
+		byte_id := []byte(id)
+		valor_disk := string(byte_id[0])
+		fmt.Println(valor_disk)
 
+		text := "digraph H {\n"
+		text += "\tgraph [pad=\"0.5\", nodesep=\"0.5\", ranksep=\"1\"];\n"
+		text += "\tnode [shape=plaintext]\n"
+		text += "\t\trankir=LR;\n"
+
+		//Validar que exista disco
+		disco := Utilities.BusquedaArchivo(valor_disk)
+		if disco {
+			//Si existe el disco
+			text += reportes.TreeSystem(valor_disk, id)
+			//Cerrar la estructura
+			// text += "</TABLE>>];\n"
+			text += "}"
+
+			Utilities.CrearGrafo(text, pathdot, pathPDF)
+
+			// fmt.Println(text)
+		} else {
+			//no existe
+			fmt.Println("Error: No existe el disco. rep")
+			return
+		}
 	default:
 		fmt.Println("Reporte no reconocido")
 	}

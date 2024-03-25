@@ -31,8 +31,10 @@ mkgrp -name=usua7rios
 rmgrp -name=usua7rios
 mkusr -user=userdd1 -pass=1123 -grp=usuarios
 mkusr -user=user1 -pass=1123 -grp=usuarios
+mkusr -user=uNEW1 -pass=1123 -grp=usuarios
+mkusr -user=uW1 -pass=1123 -grp=usuarios
+mkusr -user=uN55W1 -pass=1123 -grp=usuarios
+mkusr -user=W1 -pass=1123 -grp=usuarios
+mkusr -user=uPP1 -pass=1123 -grp=usuarios
 rmusr -user=user1
-rmusr -user=userdd1
-rmusr -user=userdd1
-rmgrp -name=usuarios
-rmgrp -name=usuarios
+
