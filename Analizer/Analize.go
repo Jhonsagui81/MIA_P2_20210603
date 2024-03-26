@@ -37,9 +37,10 @@ func Analize() {
 
 		command, params := getCommandAndParams(input)
 
-		fmt.Println("Command: ", command, "Params: ", params)
-
-		AnalyzeCommnad(strings.ToLower(command), params)
+		if command != "" {
+			fmt.Println("Command: ", command, "Params: ", params)
+			AnalyzeCommnad(strings.ToLower(command), params)
+		}
 	}
 }
 
@@ -75,6 +76,8 @@ func AnalyzeCommnad(command string, params string) {
 		fn_execute(params)
 	} else if strings.Contains(command, "#") {
 		fmt.Println("Es un comentario")
+	} else if strings.Contains(command, "pause") {
+		fn_pause()
 	} else {
 		fmt.Println("Error: Command not found")
 	}
@@ -104,9 +107,23 @@ func AnalizerType(ruta_archivo string) {
 		lineaSinComentario := regex.ReplaceAllString(line, "")
 
 		command, params := getCommandAndParams(lineaSinComentario)
-		fmt.Println("Command: ", command, "Params: ", params)
-		AnalyzeCommnad(command, params)
+		if command != "" {
+			fmt.Println("Command: ", command, "Params: ", params)
+			AnalyzeCommnad(strings.ToLower(command), params)
+		}
 	}
+}
+
+func fn_pause() {
+	fmt.Println("====== Start Pause ======")
+	fmt.Println("Presione ENTER para continuar")
+	reader := bufio.NewReader(os.Stdin)
+	_, err := reader.ReadString('\n')
+	if err != nil {
+		fmt.Println("Error al leer la entrada del usuario:", err)
+		return
+	}
+	fmt.Println("===== END Pause =====")
 }
 
 func fn_execute(params string) {

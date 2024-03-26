@@ -25,7 +25,8 @@ mkfs -type=full -id=A103 -fs=2fs
 rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_sb.pdf" -name=sb
 rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_tree.pdf" -name=tree
 
+pause
+mkdisk -param=x #ERR
+
 #Error de indices es que el for reasigna las posiciones
-
-
 
