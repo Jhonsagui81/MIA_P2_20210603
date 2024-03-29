@@ -78,6 +78,10 @@ func AnalyzeCommnad(command string, params string) {
 		fmt.Println("Es un comentario")
 	} else if strings.Contains(command, "pause") {
 		fn_pause()
+	} else if strings.Contains(command, "cat") {
+		fn_cat(params)
+	} else if strings.Contains(command, "mkfile") {
+
 	} else {
 		fmt.Println("Error: Command not found")
 	}
@@ -112,6 +116,26 @@ func AnalizerType(ruta_archivo string) {
 			AnalyzeCommnad(strings.ToLower(command), params)
 		}
 	}
+}
+
+func fn_cat(params string) {
+	path := ""
+	matches := re.FindAllStringSubmatch(params, -1)
+	for _, match := range matches {
+		flagName := match[1]
+		flagValue := match[2]
+
+		flagValue = strings.Trim(flagValue, "\"") // Removing the double
+		switch flagName {
+		case "file":
+			path = flagValue
+		default:
+			fmt.Println("Error: Flag not found")
+		}
+
+	}
+	filesystem.Cat(path)
+
 }
 
 func fn_pause() {

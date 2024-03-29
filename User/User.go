@@ -4,6 +4,7 @@ import (
 	global "PROYECTO1_MIA/Global"
 	"PROYECTO1_MIA/Structs"
 	"PROYECTO1_MIA/Utilities"
+	"PROYECTO1_MIA/UtilitiesInodes"
 	"encoding/binary"
 	"fmt"
 	"os"
@@ -75,7 +76,7 @@ func Login(user string, pass string, id string) {
 	// initSearch -> 1
 
 	//Mando a bucar el archivo user.txt
-	indexInode := initSearch(file, tempSuperblock, 0, "users.txt")
+	indexInode := UtilitiesInodes.InitSearch("/users.txt", file, tempSuperblock)
 	//file, superbloque, posicion de inodo inicial, archivo/carpeta a buscar
 
 	//recupero el indo en indexInode -> concateno todos sus bloques porque este inode es tipo archivo
@@ -92,32 +93,51 @@ func Login(user string, pass string, id string) {
 		//Validar apuntadores indirectos
 
 		//Repuero el bloque del archivo, para obtener la data
-		var Fileblock Structs.Fileblock
-		if err := Utilities.ReadObject(file, &Fileblock, int64(tempSuperblock.S_block_start+crrInode.I_block[0]*int32(binary.Size(Structs.Fileblock{})))); err != nil {
-			return
-		}
-
-		fmt.Println("Fileblock------------")
-		data := string(Fileblock.B_content[:])
+		data := UtilitiesInodes.GetInodeFileData(crrInode, file, tempSuperblock)
+		data = strings.TrimSuffix(data, "\n")
 		// Dividir la cadena en líneas
 		lines := strings.Split(data, "\n")
 
 		// Iterar a través de las líneas
+		var Uid string
+		var grupoLogeado string
+		existeUsuario := false
 		for _, line := range lines {
 			// Imprimir cada línea
 			fields := strings.Split(line, ",")
+
 			if len(fields) != 3 {
+				UID := fields[0]
+				grupo := fields[2]
 				username := fields[3]
 				password := fields[4]
 
 				if username == user && password == pass {
-					global.Logear(user, pass, driveletter, id)
-					fmt.Println("logeo exitoso...")
+					existeUsuario = true
+					Uid = UID
+					grupoLogeado = grupo
 					break
-				} else {
-					fmt.Println("Error: Usuario no registrado")
 				}
 			}
+		}
+
+		if existeUsuario {
+			for _, line := range lines {
+				// Imprimir cada línea
+				fields := strings.Split(line, ",")
+
+				if len(fields) == 3 {
+					GIDActual := fields[0]
+					grupoActual := fields[2]
+
+					if grupoActual == grupoLogeado {
+						global.Logear(user, pass, Uid, GIDActual, driveletter, id)
+						fmt.Println("logeo exitoso...")
+					}
+				}
+			}
+		} else {
+			fmt.Println("Error: Usuario no registrado")
 		}
 
 	} else {

@@ -180,7 +180,7 @@ func create_ext2(n int32, partition Structs.Partition, newSuperblock Structs.Sup
 	copy(Inode0.I_ctime[:], date)
 	copy(Inode0.I_mtime[:], date)
 	copy(Inode0.I_type[:], "0") //Carpetas
-	copy(Inode0.I_perm[:], "777")
+	copy(Inode0.I_perm[:], "664")
 
 	//MAS adelante explica porque sirve que sea -1
 	//Se inicializan todos sus apuntadores -1 porque aun no apuntan a nada

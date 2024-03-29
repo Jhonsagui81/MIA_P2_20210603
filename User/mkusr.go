@@ -124,7 +124,6 @@ func Mkusr(userNew string, passNew string, grupoValidar string) {
 								User := fields[3]
 								if User == userNew {
 									//Usuario ya existe
-									fmt.Println("Error: Usuario ya existe -MKUSR")
 									ExisteUser = true
 								}
 
@@ -134,6 +133,12 @@ func Mkusr(userNew string, passNew string, grupoValidar string) {
 						}
 					}
 
+				}
+
+				if !ExisteGrupo {
+					fmt.Println("Error: Grupo No existe -MKUSR")
+					fmt.Println("===== END MKUSR ======")
+					return
 				}
 
 				if !ExisteUser { //No existe el usuario
@@ -250,6 +255,10 @@ func Mkusr(userNew string, passNew string, grupoValidar string) {
 							fmt.Println("Error: Escritura de bloques -mkgrp", err)
 						}
 					}
+				} else {
+					fmt.Println("Error: Usuario ya existe -MKUSR")
+					fmt.Println("===== END Mkusr =====")
+					return
 				}
 
 				//Buscar el archivo user.txt

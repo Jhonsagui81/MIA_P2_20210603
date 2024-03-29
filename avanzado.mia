@@ -28,5 +28,51 @@ rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/rep
 pause
 mkdisk -param=x #ERR
 
-#Error de indices es que el for reasigna las posiciones
+
+login -user=root -pass=123 -id=A103
+
+login -user=root -pass=123 -id=A103 #ERR SESION INICIADA
+
+pause
+mkdisk -param=x #ERR
+
+#CREACION DE GRUPOS
+mkgrp -name=usuarios
+mkgrp -name=adm
+mkgrp -name=mail
+mkgrp -name=news
+mkgrp -name=sys
+mkgrp -name=sys #ERR YA EXISTE EL GRUPO
+cat -file=/users.txt
+
+pause
+mkdisk -param=x #ERR
+
+#ELIMINANDO GRUPOS------------------------------------------------
+rmgrp -name=mail
+cat -file=/users.txt
+
+pause
+mkdisk -param=x #ERR
+
+#CREACION DE USUARIOS------------------------------------------------
+mkusr -user="usuario1" -pass=password -grp=root
+mkusr -user="user1" -pass=abc -grp=usuarios
+mkusr -user="user2" -pass=abc -grp=usuarios
+mkusr -user="user2" -pass=abc -grp=usuarios #ERR EL USUARIO YA EXISTE
+mkusr -user="user3" -pass=abc -grp=system #ERR GRUPO NO EXISTE
+cat -file=/users.txt
+
+pause
+mkdisk -param=x #ERR
+
+#ELIMINANDO USUARIOS------------------------------------------------
+rmusr -user=user2
+cat -file=/users.txt
+
+pause
+mkdisk -param=x #ERR
+
+
+
 
