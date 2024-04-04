@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// Cuentan los inodos y bloques globales
 var indexI int32 //---- deberian ser globales
 var indexB int32
 
@@ -89,10 +90,12 @@ func ConexionSystem(Inode Structs.Inode, file *os.File, tempSuperbloque Structs.
 
 	tipo_doc := strings.TrimRight(string(Inode.I_type[:]), "\x00")
 	if tipo_doc == "0" {
-		text += "\tInodo" + indexInodo + ":" //Para apuntadores del grafo
 		//Iniciar busque de sus apuntadores
 		for i, block := range Inode.I_block {
 			if block != -1 {
+				text += "\tInodo" + indexInodo + ":"
+				indexBloque = fmt.Sprintf("%d", block)
+				indexB = block
 				if i < 12 { //Pendiente verificar el indice
 					//procedimiento para recorrer bloque de carpeta
 					apuntaGrafo := fmt.Sprintf("%d", i) //Para hacer conexciones con el grafo
@@ -107,7 +110,7 @@ func ConexionSystem(Inode Structs.Inode, file *os.File, tempSuperbloque Structs.
 					//para llamar al siguiente inodo
 					for i, folder1 := range crrFolderBlock.B_content {
 						nombre_docu := strings.TrimRight(string(folder1.B_name[:]), "\x00")
-						if nombre_docu != "." && nombre_docu != ".." {
+						if nombre_docu != "." && nombre_docu != ".." && nombre_docu != "" {
 							//Descartamos primeros dos inodos
 							var NextInode Structs.Inode
 							// Read object from bin file
@@ -116,11 +119,11 @@ func ConexionSystem(Inode Structs.Inode, file *os.File, tempSuperbloque Structs.
 							}
 							indiceBoque := fmt.Sprintf("%d", i)
 							text += "\tBloque" + indexBloque + ":P" + indiceBoque + " -> "
-							indexI += 1
-							indexInodo := fmt.Sprintf("%d", indexI)
+							indexI = folder1.B_inodo
+							indexInodo := fmt.Sprintf("%d", folder1.B_inodo)
 							text += "Inodo" + indexInodo + ";\n"
 							text += ConexionSystem(NextInode, file, tempSuperbloque)
-							return text
+
 						}
 					}
 
@@ -131,14 +134,15 @@ func ConexionSystem(Inode Structs.Inode, file *os.File, tempSuperbloque Structs.
 		//Iniciar busque de sus apuntadores
 		for i, block := range Inode.I_block {
 			if block != -1 {
-				text += "\tInodo" + indexInodo + ":" //Para apuntadores del grafo
-				if i < 12 {                          //Pendiente verificar el indice
+				text += "\tInodo" + indexInodo + ":"
+				indexB = block //Para apuntadores del grafo
+				if i < 12 {    //Pendiente verificar el indice
 
 					apuntaGrafo := fmt.Sprintf("%d", i) //Para hacer conexciones con el grafo
 					// indiceApunta := fmt.Sprintf("%d", block) //indice al que apunta la posicion actual
 					text += "P" + apuntaGrafo + " -> "
 
-					indexBloque := fmt.Sprintf("%d", indexB+1)
+					indexBloque := fmt.Sprintf("%d", indexB)
 					//Procedimiento para iterar bloques de texto
 					var crrFileBlock Structs.Fileblock
 					if err := Utilities.ReadObject(file, &crrFileBlock, int64(tempSuperbloque.S_block_start+block*int32(binary.Size(Structs.Fileblock{})))); err != nil {
@@ -146,7 +150,6 @@ func ConexionSystem(Inode Structs.Inode, file *os.File, tempSuperbloque Structs.
 					}
 					//Construir Grafo del bloque
 					text += "Bloque" + indexBloque + ";\n" //Para apuntadores del graf
-					indexB += 1
 
 				}
 			}
@@ -185,6 +188,8 @@ func RecorridoSystem(Inode Structs.Inode, file *os.File, tempSuperbloque Structs
 		//Iniciar busque de sus apuntadores
 		for i, block := range Inode.I_block {
 			if block != -1 {
+				indexBloque = fmt.Sprintf("%d", block)
+				indexB = block
 				if i < 12 { //Pendiente verificar el indice
 					//procedimiento para recorrer bloque de carpeta
 					var crrFolderBlock Structs.Folderblock
@@ -204,31 +209,37 @@ func RecorridoSystem(Inode Structs.Inode, file *os.File, tempSuperbloque Structs
 					}
 					text += "\t\t\t</table>\n"
 					text += "\t\t>];\n"
-					indexB += 1
+
 					//para llamar al siguiente inodo
+					// coincide := false
 					for _, folder1 := range crrFolderBlock.B_content {
 						nombre_docu := strings.TrimRight(string(folder1.B_name[:]), "\x00")
-						if nombre_docu != "." && nombre_docu != ".." {
+						if nombre_docu != "." && nombre_docu != ".." && nombre_docu != "" {
 							//Descartamos primeros dos inodos
+							// coincide = true
 							var NextInode Structs.Inode
 							// Read object from bin file
 							if err := Utilities.ReadObject(file, &NextInode, int64(tempSuperbloque.S_inode_start+folder1.B_inodo*int32(binary.Size(Structs.Inode{})))); err != nil {
 								return ""
 							}
-							indexI += 1
+							indexI = folder1.B_inodo
 							text += RecorridoSystem(NextInode, file, tempSuperbloque)
-							return text
+
 						}
 					}
-
+					// if !coincide {
+					// 	return text
+					// }
 				}
+
 			}
 		}
-
+		return text
 	} else if tipo_doc == "1" {
 		//Iniciar busque de sus apuntadores
 		for i, block := range Inode.I_block {
 			if block != -1 {
+				indexB = block
 				if i < 12 { //Pendiente verificar el indice
 					indexBloque := fmt.Sprintf("%d", indexB)
 					//Procedimiento para iterar bloques de texto
@@ -243,14 +254,13 @@ func RecorridoSystem(Inode Structs.Inode, file *os.File, tempSuperbloque Structs
 					text += "\t\t\t\t<tr><td colspan=\"1\">Bloque " + indexBloque + "</td></tr>\n"
 					content := strings.TrimRight(string(crrFileBlock.B_content[:]), "\x00")
 					text += "\t\t\t\t<tr><td>" + content + "</td></tr>\n"
-					indexB += 1
+					// indexB += 1
 					text += "\t\t\t</table>\n"
 					text += "\t\t>];\n"
 				}
 			}
 		}
-
+		return text
 	}
-
 	return text
 }

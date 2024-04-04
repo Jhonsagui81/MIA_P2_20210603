@@ -36,9 +36,9 @@ func InitSearch(path string, file *os.File, tempSuperblock Structs.Superblock) i
 
 // Para elimincar espacion entre palabras (no estoy seguro)
 func pop(s *[]string) string {
-	lastIndex := len(*s) - 1
+	lastIndex := 0 // Cambiar el índice a 0
 	last := (*s)[lastIndex]
-	*s = (*s)[:lastIndex]
+	*s = (*s)[lastIndex+1:] // Cambiar el orden de las operaciones
 	return last
 }
 
@@ -91,7 +91,7 @@ func SarchInodeByPath(StepsPath []string, Inode Structs.Inode, file *os.File, te
 	}
 
 	fmt.Println("======End SARCHINODEBYPATH======")
-	return 0
+	return -1
 }
 
 func GetInodeFileData(Inode Structs.Inode, file *os.File, tempSuperblock Structs.Superblock) string {

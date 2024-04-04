@@ -73,6 +73,40 @@ cat -file=/users.txt
 pause
 mkdisk -param=x #ERR
 
+#CREACION DE CARPETAS------------------------------------------------
+mkdir -path=/bin
+mkdir -path=/boot
+mkdir -path=/cdrom
+mkdir -path=/dev
+mkdir -path=/etc
+mkdir -path=/home
+mkdir -path=/lib
+mkdir -path=/lib64
+mkdir -path=/media
+mkdir -path=/mnt
+mkdir -path=/opt
+mkdir -path=/proc
+mkdir -path=/run
+mkdir -path=/sbin
+mkdir -path=/snap
+mkdir -path=/srv
+mkdir -path=/sys
+mkdir -path=/tmp
+mkdir -path=/var
+mkdir -r -path="/home/archivos/archivos 19"
+mkdir -r -path=/home/archivos/user/docs/usac 
+mkdir -r -path=/home/archivos/carpeta1/carpeta2/carpeta3/carpeta4/carpeta5
 
 
+rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_tree.pdf" -name=tree
 
+pause
+mkdisk -param=x #ERR
+
+logout
+logout #ERR NO HAY SESION INICIADA
+
+pause
+mkdisk -param=x #ERR
+
+login -user=usuario1 -pass=password -id=A103

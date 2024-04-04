@@ -182,6 +182,10 @@ func create_ext2(n int32, partition Structs.Partition, newSuperblock Structs.Sup
 	copy(Inode0.I_type[:], "0") //Carpetas
 	copy(Inode0.I_perm[:], "664")
 
+	fmt.Println("||||||||||--------------")
+	fmt.Println(Inode0.I_perm)
+	perm_u := strings.TrimRight(string(Inode0.I_perm[0]), "\x00")
+	fmt.Println("fddfd ", perm_u)
 	//MAS adelante explica porque sirve que sea -1
 	//Se inicializan todos sus apuntadores -1 porque aun no apuntan a nada
 	for i := int32(0); i < 15; i++ {
@@ -208,6 +212,8 @@ func create_ext2(n int32, partition Structs.Partition, newSuperblock Structs.Sup
 	//tercero
 	Folderblock0.B_content[2].B_inodo = 1 //apunta al inodo numero 1 (se crea abajo)
 	copy(Folderblock0.B_content[2].B_name[:], "users.txt")
+	//Cuarto
+	Folderblock0.B_content[3].B_inodo = -1
 
 	var Inode1 Structs.Inode //Inode 1
 	Inode1.I_uid = 1

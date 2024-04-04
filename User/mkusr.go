@@ -197,13 +197,16 @@ func Mkusr(userNew string, passNew string, grupoValidar string) {
 							fmt.Println(">64")
 							fmt.Println("deberia iterar:", numFileblock)
 							// diferencia := 64 - (len(newData) % 64)
+							no_bloque := tempSuperblock.S_blocks_count - tempSuperblock.S_free_blocks_count
+							if no_bloque < int32(numFileblock+1) {
+								tempSuperblock.S_free_blocks_count -= 1
+							}
 							// cadenaRellena := newData + strings.Repeat(" ", diferencia)
 							for i, trozo := range trozos {
 
 								//resta bloque libres
 
 								//se apunta inodo
-								no_bloque := tempSuperblock.S_blocks_count - tempSuperblock.S_free_blocks_count
 								fmt.Println("no bloque siguiente:", i+1)
 								//Crear bloque
 
@@ -219,7 +222,6 @@ func Mkusr(userNew string, passNew string, grupoValidar string) {
 								copy(newFileblock.B_content[:], trozo)
 
 								//Escribir la info en el archivo
-								tempSuperblock.S_free_blocks_count -= 1
 								// write superblock
 								err := Utilities.WriteObject(file, tempSuperblock, int64(PartitionStart))
 

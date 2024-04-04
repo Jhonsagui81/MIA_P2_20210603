@@ -80,8 +80,8 @@ func AnalyzeCommnad(command string, params string) {
 		fn_pause()
 	} else if strings.Contains(command, "cat") {
 		fn_cat(params)
-	} else if strings.Contains(command, "mkfile") {
-
+	} else if strings.Contains(command, "mkdir") {
+		fn_mkdir(params)
 	} else {
 		fmt.Println("Error: Command not found")
 	}
@@ -116,6 +116,35 @@ func AnalizerType(ruta_archivo string) {
 			AnalyzeCommnad(strings.ToLower(command), params)
 		}
 	}
+}
+
+func fn_mkdir(params string) {
+	path := ""
+	r := false
+	// var re = regexp.MustCompile(`-(\w+)|\s-`)
+	slide := strings.Split(params, "-")
+	for _, param := range slide {
+		if param == "r " {
+			r = true
+		}
+	}
+	matches := re.FindAllStringSubmatch(params, -1)
+	for _, match := range matches {
+		flagName := match[1]
+		flagValue := match[2]
+
+		flagValue = strings.Trim(flagValue, "\"") // Removing the double
+		switch flagName {
+		case "path":
+			path = flagValue
+		case "r":
+			r = true
+		default:
+			fmt.Println("Error: Flag not found")
+		}
+
+	}
+	filesystem.Mkdir(path, r)
 }
 
 func fn_cat(params string) {

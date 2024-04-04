@@ -25,6 +25,8 @@ func Login(user string, pass string, id string) {
 	}
 
 	driveletter := string(id[0])
+	partition := string(id[1])
+	partitionStart := 0
 
 	// Open bin file
 	filepath := "./MIA/P1/" + strings.ToUpper(driveletter) + ".dsk"
@@ -49,6 +51,7 @@ func Login(user string, pass string, id string) {
 				if strings.Contains(string(TempMBR.Partitions[i].Status[:]), "1") {
 					fmt.Println("Partition is mounted")
 					index = i
+					partitionStart = int(TempMBR.Partitions[i].Start)
 				} else {
 					fmt.Println("Partition is not mounted")
 					return
@@ -131,7 +134,7 @@ func Login(user string, pass string, id string) {
 					grupoActual := fields[2]
 
 					if grupoActual == grupoLogeado {
-						global.Logear(user, pass, Uid, GIDActual, driveletter, id)
+						global.Logear(user, pass, Uid, GIDActual, driveletter, partition, partitionStart, id)
 						fmt.Println("logeo exitoso...")
 					}
 				}
