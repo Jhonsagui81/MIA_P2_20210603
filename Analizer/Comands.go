@@ -10,8 +10,12 @@ import (
 	"time"
 )
 
-func rep(name string, path string, id string) {
+func rep(name string, path string, id string, ruta string) {
 	//Open file
+	fmt.Println("name:", name)
+	fmt.Println("path:", path)
+	fmt.Println("id", id)
+	fmt.Println("ruta:", ruta)
 	fmt.Println("======Start REP======")
 	//Transformacio a dot
 	pathdot := path[:len(path)-3]
@@ -125,6 +129,72 @@ func rep(name string, path string, id string) {
 			Utilities.CrearGrafo(text, pathdot, pathPDF)
 
 			// fmt.Println(text)
+		} else {
+			//no existe
+			fmt.Println("Error: No existe el disco. rep")
+			return
+		}
+	case "inode":
+		byte_id := []byte(id)
+		valor_disk := string(byte_id[0])
+		fmt.Println(valor_disk)
+
+		text := "digraph H {\n"
+		text += "\tgraph [pad=\"0.5\", nodesep=\"0.5\", ranksep=\"1\"];\n"
+		text += "\tnode [shape=plaintext]\n"
+		text += "\t\trankir=LR;\n"
+
+		disco := Utilities.BusquedaArchivo(valor_disk)
+		if disco {
+			//Si existe el disco
+			text += reportes.InitInodos(valor_disk, id)
+			//Cerrar la estructura
+			text += "}"
+
+			Utilities.CrearGrafo(text, pathdot, pathPDF)
+
+			// fmt.Println(text)
+		} else {
+			//no existe
+			fmt.Println("Error: No existe el disco. rep")
+			return
+		}
+	case "block":
+		byte_id := []byte(id)
+		valor_disk := string(byte_id[0])
+		fmt.Println(valor_disk)
+
+		text := "digraph H {\n"
+		text += "\tgraph [pad=\"0.5\", nodesep=\"0.5\", ranksep=\"1\"];\n"
+		text += "\tnode [shape=plaintext]\n"
+		text += "\t\trankir=LR;\n"
+
+		disco := Utilities.BusquedaArchivo(valor_disk)
+		if disco {
+			//Si existe el disco
+			text += reportes.InitBloques(valor_disk, id)
+			//Cerrar la estructura
+			text += "}"
+
+			Utilities.CrearGrafo(text, pathdot, pathPDF)
+
+			// fmt.Println(text)
+		} else {
+			//no existe
+			fmt.Println("Error: No existe el disco. rep")
+			return
+		}
+	case "file":
+		byte_id := []byte(id)
+		valor_disk := string(byte_id[0])
+		fmt.Println(valor_disk)
+		disco := Utilities.BusquedaArchivo(valor_disk)
+		if disco {
+
+			if reportes.ReporteFile(valor_disk, id, ruta, path) {
+				fmt.Println("Reporte creado")
+			}
+
 		} else {
 			//no existe
 			fmt.Println("Error: No existe el disco. rep")

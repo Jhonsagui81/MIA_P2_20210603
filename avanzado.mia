@@ -98,7 +98,7 @@ mkdir -r -path=/home/archivos/user/docs/usac
 mkdir -r -path=/home/archivos/carpeta1/carpeta2/carpeta3/carpeta4/carpeta5
 
 
-rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_tree.pdf" -name=tree
+rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte2_tree.pdf" -name=tree
 
 pause
 mkdisk -param=x #ERR
@@ -110,3 +110,7 @@ pause
 mkdisk -param=x #ERR
 
 login -user=usuario1 -pass=password -id=A103
+
+rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_inode.pdf" -name=inode
+rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_block.pdf" -name=block
+rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/file/reporte1_file.txt" -ruta=/users.txt -name=file

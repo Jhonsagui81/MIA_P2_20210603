@@ -592,9 +592,9 @@ func fn_rep(params string) {
 		}
 	}
 
-	fmt.Println("Ruta:", ruta)
+	// fmt.Println("Ruta:", ruta)
 	if flags {
-		rep(name, path, id)
+		rep(name, path, id, ruta)
 	} else {
 		fmt.Println("Error: Parametros no validos. -REP")
 	}
