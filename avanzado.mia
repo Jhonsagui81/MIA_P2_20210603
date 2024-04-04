@@ -140,5 +140,13 @@ mkdisk -param=x #ERR
 
 rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_inode.pdf" -name=inode
 rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_block.pdf" -name=block
+rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte2_sb.pdf" -name=sb
 rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/file/reporte1_file.txt" -ruta=/users.txt -name=file
+
+pause
+mkdisk -param=x #ERR
+
+logout
+
+login -user=root -pass=123 -id=A103
 
