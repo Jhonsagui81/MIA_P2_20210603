@@ -82,6 +82,8 @@ func AnalyzeCommnad(command string, params string) {
 		fn_cat(params)
 	} else if strings.Contains(command, "mkdir") {
 		fn_mkdir(params)
+	} else if strings.Contains(command, "mkfile") {
+		fn_mkfile(params)
 	} else {
 		fmt.Println("Error: Command not found")
 	}
@@ -145,6 +147,42 @@ func fn_mkdir(params string) {
 
 	}
 	filesystem.Mkdir(path, r)
+}
+
+func fn_mkfile(params string) {
+	path := ""
+	size := 1
+	cont := ""
+	r := false
+	slide := strings.Split(params, "-")
+	for _, param := range slide {
+		if param == "r " {
+			r = true
+		}
+	}
+	matches := re.FindAllStringSubmatch(params, -1)
+	for _, match := range matches {
+		flagName := match[1]
+		flagValue := match[2]
+
+		flagValue = strings.Trim(flagValue, "\"") // Removing the double
+		switch flagName {
+		case "path":
+			path = flagValue
+		case "size":
+			sizeValue := 0
+			fmt.Sscanf(flagValue, "%d", &sizeValue)
+			size = sizeValue
+		case "cont":
+			cont = flagValue
+		case "r":
+			r = true
+		default:
+			fmt.Println("Error: Flag not found")
+		}
+
+	}
+	filesystem.Mkfile(path, r, size, cont)
 }
 
 func fn_cat(params string) {

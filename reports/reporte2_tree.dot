@@ -388,7 +388,7 @@ digraph H {
 			<table border="0" cellborder="1" cellspacing="0">
 				<tr><td colspan="2">Inodo 24</td></tr>
 				<tr><td>apt1</td><td port='P0'>31</td></tr>
-				<tr><td>apt2</td><td port='P1'>-1</td></tr>
+				<tr><td>apt2</td><td port='P1'>41</td></tr>
 				<tr><td>apt3</td><td port='P2'>-1</td></tr>
 				<tr><td>apt4</td><td port='P3'>-1</td></tr>
 				<tr><td>apt5</td><td port='P4'>-1</td></tr>
@@ -411,7 +411,7 @@ digraph H {
 				<tr><td>.</td><td port='P0'>24</td></tr>
 				<tr><td>..</td><td port='P1'>0</td></tr>
 				<tr><td>usac</td><td port='P2'>25</td></tr>
-				<tr><td></td><td port='P3'>-1</td></tr>
+				<tr><td>Tarea.txt</td><td port='P3'>31</td></tr>
 			</table>
 		>];
 	Inodo25 [
@@ -441,8 +441,329 @@ digraph H {
 				<tr><td colspan="2">Bloque 32</td></tr>
 				<tr><td>.</td><td port='P0'>25</td></tr>
 				<tr><td>..</td><td port='P1'>0</td></tr>
+				<tr><td>archivos</td><td port='P2'>34</td></tr>
+				<tr><td></td><td port='P3'>-1</td></tr>
+			</table>
+		>];
+	Inodo34 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="2">Inodo 34</td></tr>
+				<tr><td>apt1</td><td port='P0'>58</td></tr>
+				<tr><td>apt2</td><td port='P1'>-1</td></tr>
+				<tr><td>apt3</td><td port='P2'>-1</td></tr>
+				<tr><td>apt4</td><td port='P3'>-1</td></tr>
+				<tr><td>apt5</td><td port='P4'>-1</td></tr>
+				<tr><td>apt6</td><td port='P5'>-1</td></tr>
+				<tr><td>apt7</td><td port='P6'>-1</td></tr>
+				<tr><td>apt8</td><td port='P7'>-1</td></tr>
+				<tr><td>apt9</td><td port='P8'>-1</td></tr>
+				<tr><td>apt10</td><td port='P9'>-1</td></tr>
+				<tr><td>apt11</td><td port='P10'>-1</td></tr>
+				<tr><td>apt12</td><td port='P11'>-1</td></tr>
+				<tr><td>apt13</td><td port='P12'>-1</td></tr>
+				<tr><td>apt14</td><td port='P13'>-1</td></tr>
+				<tr><td>apt15</td><td port='P14'>-1</td></tr>
+			</table>
+		>];
+	Bloque58 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="2">Bloque 58</td></tr>
+				<tr><td>.</td><td port='P0'>34</td></tr>
+				<tr><td>..</td><td port='P1'>0</td></tr>
+				<tr><td>proyectos</td><td port='P2'>35</td></tr>
+				<tr><td></td><td port='P3'>-1</td></tr>
+			</table>
+		>];
+	Inodo35 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="2">Inodo 35</td></tr>
+				<tr><td>apt1</td><td port='P0'>59</td></tr>
+				<tr><td>apt2</td><td port='P1'>-1</td></tr>
+				<tr><td>apt3</td><td port='P2'>-1</td></tr>
+				<tr><td>apt4</td><td port='P3'>-1</td></tr>
+				<tr><td>apt5</td><td port='P4'>-1</td></tr>
+				<tr><td>apt6</td><td port='P5'>-1</td></tr>
+				<tr><td>apt7</td><td port='P6'>-1</td></tr>
+				<tr><td>apt8</td><td port='P7'>-1</td></tr>
+				<tr><td>apt9</td><td port='P8'>-1</td></tr>
+				<tr><td>apt10</td><td port='P9'>-1</td></tr>
+				<tr><td>apt11</td><td port='P10'>-1</td></tr>
+				<tr><td>apt12</td><td port='P11'>-1</td></tr>
+				<tr><td>apt13</td><td port='P12'>-1</td></tr>
+				<tr><td>apt14</td><td port='P13'>-1</td></tr>
+				<tr><td>apt15</td><td port='P14'>-1</td></tr>
+			</table>
+		>];
+	Bloque59 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="2">Bloque 59</td></tr>
+				<tr><td>.</td><td port='P0'>35</td></tr>
+				<tr><td>..</td><td port='P1'>0</td></tr>
+				<tr><td>fase1</td><td port='P2'>36</td></tr>
+				<tr><td></td><td port='P3'>-1</td></tr>
+			</table>
+		>];
+	Inodo36 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="2">Inodo 36</td></tr>
+				<tr><td>apt1</td><td port='P0'>60</td></tr>
+				<tr><td>apt2</td><td port='P1'>-1</td></tr>
+				<tr><td>apt3</td><td port='P2'>-1</td></tr>
+				<tr><td>apt4</td><td port='P3'>-1</td></tr>
+				<tr><td>apt5</td><td port='P4'>-1</td></tr>
+				<tr><td>apt6</td><td port='P5'>-1</td></tr>
+				<tr><td>apt7</td><td port='P6'>-1</td></tr>
+				<tr><td>apt8</td><td port='P7'>-1</td></tr>
+				<tr><td>apt9</td><td port='P8'>-1</td></tr>
+				<tr><td>apt10</td><td port='P9'>-1</td></tr>
+				<tr><td>apt11</td><td port='P10'>-1</td></tr>
+				<tr><td>apt12</td><td port='P11'>-1</td></tr>
+				<tr><td>apt13</td><td port='P12'>-1</td></tr>
+				<tr><td>apt14</td><td port='P13'>-1</td></tr>
+				<tr><td>apt15</td><td port='P14'>-1</td></tr>
+			</table>
+		>];
+	Bloque60 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="2">Bloque 60</td></tr>
+				<tr><td>.</td><td port='P0'>36</td></tr>
+				<tr><td>..</td><td port='P1'>0</td></tr>
+				<tr><td>entrada.txt</td><td port='P2'>37</td></tr>
+				<tr><td></td><td port='P3'>-1</td></tr>
+			</table>
+		>];
+	Inodo37 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="2">Inodo 37</td></tr>
+				<tr><td>apt1</td><td port='P0'>61</td></tr>
+				<tr><td>apt2</td><td port='P1'>-1</td></tr>
+				<tr><td>apt3</td><td port='P2'>-1</td></tr>
+				<tr><td>apt4</td><td port='P3'>-1</td></tr>
+				<tr><td>apt5</td><td port='P4'>-1</td></tr>
+				<tr><td>apt6</td><td port='P5'>-1</td></tr>
+				<tr><td>apt7</td><td port='P6'>-1</td></tr>
+				<tr><td>apt8</td><td port='P7'>-1</td></tr>
+				<tr><td>apt9</td><td port='P8'>-1</td></tr>
+				<tr><td>apt10</td><td port='P9'>-1</td></tr>
+				<tr><td>apt11</td><td port='P10'>-1</td></tr>
+				<tr><td>apt12</td><td port='P11'>-1</td></tr>
+				<tr><td>apt13</td><td port='P12'>-1</td></tr>
+				<tr><td>apt14</td><td port='P13'>-1</td></tr>
+				<tr><td>apt15</td><td port='P14'>-1</td></tr>
+			</table>
+		>];
+	Bloque61 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 61</td></tr>
+				<tr><td>0</td></tr>
+			</table>
+		>];
+	Inodo31 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="2">Inodo 31</td></tr>
+				<tr><td>apt1</td><td port='P0'>39</td></tr>
+				<tr><td>apt2</td><td port='P1'>40</td></tr>
+				<tr><td>apt3</td><td port='P2'>-1</td></tr>
+				<tr><td>apt4</td><td port='P3'>-1</td></tr>
+				<tr><td>apt5</td><td port='P4'>-1</td></tr>
+				<tr><td>apt6</td><td port='P5'>-1</td></tr>
+				<tr><td>apt7</td><td port='P6'>-1</td></tr>
+				<tr><td>apt8</td><td port='P7'>-1</td></tr>
+				<tr><td>apt9</td><td port='P8'>-1</td></tr>
+				<tr><td>apt10</td><td port='P9'>-1</td></tr>
+				<tr><td>apt11</td><td port='P10'>-1</td></tr>
+				<tr><td>apt12</td><td port='P11'>-1</td></tr>
+				<tr><td>apt13</td><td port='P12'>-1</td></tr>
+				<tr><td>apt14</td><td port='P13'>-1</td></tr>
+				<tr><td>apt15</td><td port='P14'>-1</td></tr>
+			</table>
+		>];
+	Bloque39 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 39</td></tr>
+				<tr><td>0123456789012345678901234567890123456789012345678901234567890123</td></tr>
+			</table>
+		>];
+	Bloque40 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 40</td></tr>
+				<tr><td>4567890123</td></tr>
+			</table>
+		>];
+	Bloque41 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="2">Bloque 41</td></tr>
+				<tr><td>Tarea2.txt</td><td port='P0'>32</td></tr>
+				<tr><td>Tarea3.txt</td><td port='P1'>33</td></tr>
 				<tr><td></td><td port='P2'>-1</td></tr>
 				<tr><td></td><td port='P3'>-1</td></tr>
+			</table>
+		>];
+	Inodo32 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="2">Inodo 32</td></tr>
+				<tr><td>apt1</td><td port='P0'>42</td></tr>
+				<tr><td>apt2</td><td port='P1'>43</td></tr>
+				<tr><td>apt3</td><td port='P2'>44</td></tr>
+				<tr><td>apt4</td><td port='P3'>45</td></tr>
+				<tr><td>apt5</td><td port='P4'>46</td></tr>
+				<tr><td>apt6</td><td port='P5'>47</td></tr>
+				<tr><td>apt7</td><td port='P6'>48</td></tr>
+				<tr><td>apt8</td><td port='P7'>49</td></tr>
+				<tr><td>apt9</td><td port='P8'>50</td></tr>
+				<tr><td>apt10</td><td port='P9'>51</td></tr>
+				<tr><td>apt11</td><td port='P10'>52</td></tr>
+				<tr><td>apt12</td><td port='P11'>53</td></tr>
+				<tr><td>apt13</td><td port='P12'>-1</td></tr>
+				<tr><td>apt14</td><td port='P13'>-1</td></tr>
+				<tr><td>apt15</td><td port='P14'>-1</td></tr>
+			</table>
+		>];
+	Bloque42 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 42</td></tr>
+				<tr><td>0123456789012345678901234567890123456789012345678901234567890123</td></tr>
+			</table>
+		>];
+	Bloque43 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 43</td></tr>
+				<tr><td>4567890123456789012345678901234567890123456789012345678901234567</td></tr>
+			</table>
+		>];
+	Bloque44 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 44</td></tr>
+				<tr><td>8901234567890123456789012345678901234567890123456789012345678901</td></tr>
+			</table>
+		>];
+	Bloque45 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 45</td></tr>
+				<tr><td>2345678901234567890123456789012345678901234567890123456789012345</td></tr>
+			</table>
+		>];
+	Bloque46 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 46</td></tr>
+				<tr><td>6789012345678901234567890123456789012345678901234567890123456789</td></tr>
+			</table>
+		>];
+	Bloque47 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 47</td></tr>
+				<tr><td>0123456789012345678901234567890123456789012345678901234567890123</td></tr>
+			</table>
+		>];
+	Bloque48 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 48</td></tr>
+				<tr><td>4567890123456789012345678901234567890123456789012345678901234567</td></tr>
+			</table>
+		>];
+	Bloque49 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 49</td></tr>
+				<tr><td>8901234567890123456789012345678901234567890123456789012345678901</td></tr>
+			</table>
+		>];
+	Bloque50 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 50</td></tr>
+				<tr><td>2345678901234567890123456789012345678901234567890123456789012345</td></tr>
+			</table>
+		>];
+	Bloque51 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 51</td></tr>
+				<tr><td>6789012345678901234567890123456789012345678901234567890123456789</td></tr>
+			</table>
+		>];
+	Bloque52 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 52</td></tr>
+				<tr><td>0123456789012345678901234567890123456789012345678901234567890123</td></tr>
+			</table>
+		>];
+	Bloque53 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 53</td></tr>
+				<tr><td>4567890123456789012345678901234567890123456789012345678901234567</td></tr>
+			</table>
+		>];
+	Inodo33 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="2">Inodo 33</td></tr>
+				<tr><td>apt1</td><td port='P0'>54</td></tr>
+				<tr><td>apt2</td><td port='P1'>55</td></tr>
+				<tr><td>apt3</td><td port='P2'>56</td></tr>
+				<tr><td>apt4</td><td port='P3'>57</td></tr>
+				<tr><td>apt5</td><td port='P4'>-1</td></tr>
+				<tr><td>apt6</td><td port='P5'>-1</td></tr>
+				<tr><td>apt7</td><td port='P6'>-1</td></tr>
+				<tr><td>apt8</td><td port='P7'>-1</td></tr>
+				<tr><td>apt9</td><td port='P8'>-1</td></tr>
+				<tr><td>apt10</td><td port='P9'>-1</td></tr>
+				<tr><td>apt11</td><td port='P10'>-1</td></tr>
+				<tr><td>apt12</td><td port='P11'>-1</td></tr>
+				<tr><td>apt13</td><td port='P12'>-1</td></tr>
+				<tr><td>apt14</td><td port='P13'>-1</td></tr>
+				<tr><td>apt15</td><td port='P14'>-1</td></tr>
+			</table>
+		>];
+	Bloque54 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 54</td></tr>
+				<tr><td>Esta es una prueba para cerificar el comando mffile del curso de</td></tr>
+			</table>
+		>];
+	Bloque55 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 55</td></tr>
+				<tr><td> manejo e implementacion de archivos del primer semestre del ano</td></tr>
+			</table>
+		>];
+	Bloque56 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 56</td></tr>
+				<tr><td> 2024, Este contenido se mandara al archivo que se almacena en e</td></tr>
+			</table>
+		>];
+	Bloque57 [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0">
+				<tr><td colspan="1">Bloque 57</td></tr>
+				<tr><td>l disco montado.
+</td></tr>
 			</table>
 		>];
 	Bloque33 [
@@ -1072,6 +1393,36 @@ digraph H {
 	Inodo24:P0 -> Bloque31;
 	Bloque31:P2 -> Inodo25;
 	Inodo25:P0 -> Bloque32;
+	Bloque32:P2 -> Inodo34;
+	Inodo34:P0 -> Bloque58;
+	Bloque58:P2 -> Inodo35;
+	Inodo35:P0 -> Bloque59;
+	Bloque59:P2 -> Inodo36;
+	Inodo36:P0 -> Bloque60;
+	Bloque60:P2 -> Inodo37;
+	Inodo37:P0 -> Bloque61;
+	Bloque31:P3 -> Inodo31;
+	Inodo31:P0 -> Bloque39;
+	Inodo31:P1 -> Bloque40;
+	Inodo24:P1 -> Bloque41;
+	Bloque41:P0 -> Inodo32;
+	Inodo32:P0 -> Bloque42;
+	Inodo32:P1 -> Bloque43;
+	Inodo32:P2 -> Bloque44;
+	Inodo32:P3 -> Bloque45;
+	Inodo32:P4 -> Bloque46;
+	Inodo32:P5 -> Bloque47;
+	Inodo32:P6 -> Bloque48;
+	Inodo32:P7 -> Bloque49;
+	Inodo32:P8 -> Bloque50;
+	Inodo32:P9 -> Bloque51;
+	Inodo32:P10 -> Bloque52;
+	Inodo32:P11 -> Bloque53;
+	Bloque41:P1 -> Inodo33;
+	Inodo33:P0 -> Bloque54;
+	Inodo33:P1 -> Bloque55;
+	Inodo33:P2 -> Bloque56;
+	Inodo33:P3 -> Bloque57;
 	Inodo21:P1 -> Bloque33;
 	Bloque33:P0 -> Inodo26;
 	Inodo26:P0 -> Bloque34;

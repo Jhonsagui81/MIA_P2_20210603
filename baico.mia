@@ -125,3 +125,13 @@ rep -id=A303 -path=/home/jhonatan/Documentos/1_USAC/1.Archivos/Proyecto1/MIA_P1_
 rep -id=IDx -path=/home/jhonatan/Documentos/1_USAC/1.Archivos/Proyecto1/MIA_P1_202106003/reports/reporte10.pdf -name=mbr #ERR ID NO ENCONTRADO
 rep -id=A403 -path=/home/jhonatan/Documentos/1_USAC/1.Archivos/Proyecto1/MIA_P1_202106003/reports/reporte11.pdf -name=disk                                                                                                      
 rep -id=A403 -path=/home/jhonatan/Documentos/1_USAC/1.Archivos/Proyecto1/MIA_P1_202106003/reports/reporte12.pdf -name=mbr
+
+
+
+
+
+rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_inode.pdf" -name=inode
+rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_block.pdf" -name=block
+rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/file/reporte1_file.txt" -ruta=/users.txt -name=file
+
+012345678901234567890123456789012345678901234567890123456789012345678901234

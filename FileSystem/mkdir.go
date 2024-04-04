@@ -117,7 +117,7 @@ func Mkdir(path string, r bool) {
 							perm_g := strings.TrimRight(string(CRRRInode0.I_perm[1]), "\x00")
 							perm_o := strings.TrimRight(string(CRRRInode0.I_perm[2]), "\x00")
 
-							if global.DeterminarPermiso(gid, uid, perm_u, perm_g, perm_o) {
+							if global.DeterminarPermisoEscritura(gid, uid, perm_u, perm_g, perm_o) {
 								//Tiene permiso de escritura
 								CrearCarpeta(CRRRInode0, file, tempSuperblock, TempMBR, PartitionStart, folder, indiceLastCoincidencia)
 
@@ -182,7 +182,7 @@ func Mkdir(path string, r bool) {
 					perm_g := strings.TrimRight(string(CRRRInode0.I_perm[1]), "\x00")
 					perm_o := strings.TrimRight(string(CRRRInode0.I_perm[2]), "\x00")
 
-					if global.DeterminarPermiso(gid, uid, perm_u, perm_g, perm_o) {
+					if global.DeterminarPermisoEscritura(gid, uid, perm_u, perm_g, perm_o) {
 						//Tiene permiso de escritura
 						CrearCarpeta(CRRRInode0, file, tempSuperblock, TempMBR, PartitionStart, StepsPath[0], 0)
 

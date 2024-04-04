@@ -111,6 +111,29 @@ mkdisk -param=x #ERR
 
 login -user=usuario1 -pass=password -id=A103
 
-rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_inode.pdf" -name=inode
-rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1_block.pdf" -name=block
-rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/file/reporte1_file.txt" -ruta=/users.txt -name=file
+#CREACION DE ARCHIVOS------------------------------------------------
+mkfile -path=/home/archivos/user/docs/Tarea.txt -size=74
+mkfile -path=/home/archivos/user/docs/Tarea2.txt -size=768
+
+mkfile -path=/home/archivos/user/docs/Tarea3.txt -size=10 -cont=/home/jhonatan/prueba.txt
+
+mkfile -path="/home/archivos/noexiste/b1.txt" #ERRNO EXISTE RUTA
+mkfile -path="/home/archivos/b1.txt" -size=-45 #ERR NEGATIVO
+
+mkfile -r -path=/home/archivos/user/docs/usac/archivos/proyectos/fase1/entrada.txt  #RECURSIVO
+
+pause
+mkdisk -param=x #ERR
+
+cat -file=/home/archivos/user/docs/Tarea2.txt
+cat -file=/home/archivos/user/docs/Tarea3.txt
+
+pause
+mkdisk -param=x #ERR
+
+
+rep -id=A103 -path="/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte3_tree.pdf" -name=tree
+
+pause
+mkdisk -param=x #ERR
+

@@ -12,11 +12,12 @@ import (
 
 func rep(name string, path string, id string, ruta string) {
 	//Open file
+
+	fmt.Println("======Start REP======")
 	fmt.Println("name:", name)
 	fmt.Println("path:", path)
 	fmt.Println("id", id)
 	fmt.Println("ruta:", ruta)
-	fmt.Println("======Start REP======")
 	//Transformacio a dot
 	pathdot := path[:len(path)-3]
 	pathdot += "dot"

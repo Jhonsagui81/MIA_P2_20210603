@@ -113,7 +113,7 @@ func InfoPartition() int64 {
 	return index
 }
 
-func DeterminarPermiso(GID string, UID string, p_u string, p_g string, p_o string) bool {
+func DeterminarPermisoEscritura(GID string, UID string, p_u string, p_g string, p_o string) bool {
 	//Verificar si el usuario actual pertenece al usuario creador o es parte del grupo
 	fmt.Println("Entra a determinar permisos =========")
 	fmt.Println("GID", GID)
@@ -137,6 +137,40 @@ func DeterminarPermiso(GID string, UID string, p_u string, p_g string, p_o strin
 		}
 	} else {
 		tienePermiso = false
+		//Se considera como "otros"
+		//Solo tiene permisos de "lectura"
+
+	}
+
+	return tienePermiso
+}
+
+func DeterminarPermisoLectura(GID string, UID string, p_u string, p_g string, p_o string) bool {
+	//Verificar si el usuario actual pertenece al usuario creador o es parte del grupo
+	fmt.Println("Entra a determinar permisos =========")
+	fmt.Println("GID", GID)
+	fmt.Println("UID", UID)
+	fmt.Println("permisos: " + p_u)
+	fmt.Println("---------------- Usuario info")
+	fmt.Println("GidUsuario", usuario.GID)
+	fmt.Println("Uidddd", usuario.UID)
+	tienePermiso := false
+	if usuario.UID == string(UID) {
+		//Es el usuario creador
+		if p_u == "4" || p_u == "5" || p_u == "6" {
+			//Tiene permiso de escritura y lectura
+			tienePermiso = true
+		}
+	} else if usuario.GID == GID {
+		//Esta dentro del grupo
+		if p_g == "4" || p_g == "5" || p_g == "6" {
+			//Tiene permiso de escritura
+			tienePermiso = true
+		}
+	} else {
+		if p_o == "4" {
+			tienePermiso = true
+		}
 		//Se considera como "otros"
 		//Solo tiene permisos de "lectura"
 
