@@ -99,7 +99,7 @@ func Mkfs(id string, type_ string, fs_ string) {
 	if fs_ == "2fs" {
 		create_ext2(n, TempMBR.Partitions[index], newSuperblock, formattedDate, file)
 	} else {
-		fmt.Println("EXT3")
+		create_ext3(n, TempMBR.Partitions[index], newSuperblock, formattedDate, file)
 	}
 
 	// Close bin file
@@ -269,4 +269,166 @@ func create_ext2(n int32, partition Structs.Partition, newSuperblock Structs.Sup
 	//mkfs -type=full -id=A119
 
 	fmt.Println("======End CREATE EXT2======")
+}
+
+func create_ext3(n int32, partition Structs.Partition, newSuperblock Structs.Superblock, date string, file *os.File) {
+	fmt.Println("======Start CREATE EXT3======")
+	fmt.Println("N:", n)
+	fmt.Println("Superblock:", newSuperblock)
+	fmt.Println("Date:", date)
+
+	//Formateando el inicio de cada estructura
+	newSuperblock.S_filesystem_type = 3
+	newSuperblock.S_bm_inode_start = partition.Start + int32(binary.Size(Structs.Superblock{})) + int32(binary.Size(Structs.Journaling{}))
+	newSuperblock.S_bm_block_start = newSuperblock.S_bm_inode_start + n
+	newSuperblock.S_inode_start = newSuperblock.S_bm_block_start + 3*n
+	newSuperblock.S_block_start = newSuperblock.S_inode_start + n*int32(binary.Size(Structs.Inode{}))
+
+	//Se le resta porque en el siguiente paso se van a crear dos bloques y dos inodos
+	newSuperblock.S_free_inodes_count -= 1
+	newSuperblock.S_free_blocks_count -= 1
+	newSuperblock.S_free_inodes_count -= 1
+	newSuperblock.S_free_blocks_count -= 1
+
+	//Rellena de ceros el bitmap inodos (porque en esa parte del disco no se mete estructura solo el 0 o el 1)
+	for i := int32(0); i < n; i++ {
+		err := Utilities.WriteObject(file, byte(0), int64(newSuperblock.S_bm_inode_start+i))
+		if err != nil {
+			fmt.Println("Error: ", err)
+		}
+	}
+
+	//Rellena de ceros el bitman bloques(porque en esa parte del disco no se mete estructura solo el 0 o el 1)
+	for i := int32(0); i < 3*n; i++ {
+		err := Utilities.WriteObject(file, byte(0), int64(newSuperblock.S_bm_block_start+i))
+		if err != nil {
+			fmt.Println("Error: ", err)
+		}
+	}
+
+	//PARTE DE INODOS Y BLOQUES CADA ESPACIO ES UNA ESTRUCTURA PEQUENA
+	//---------------Crear structura vacia donde van los inodos
+
+	//Rellena como vacios todos los apuntadores del inodo
+	var newInode Structs.Inode
+	for i := int32(0); i < 15; i++ {
+		newInode.I_block[i] = -1
+	}
+
+	//Relleno todo el espacio de inodos con estructuras vacia, solo el array esta inicializado con -1
+	for i := int32(0); i < n; i++ {
+		err := Utilities.WriteObject(file, newInode, int64(newSuperblock.S_inode_start+i*int32(binary.Size(Structs.Inode{}))))
+		if err != nil {
+			fmt.Println("Error: ", err)
+		}
+	}
+
+	//---------------Crear structura vacia donde van los bloques
+	//Relleno todo el espacio de bloques con estructuras vacias de tipo Fileblock (pointer, file y folder mide lo mismo)
+	var newFileblock Structs.Fileblock
+	for i := int32(0); i < 3*n; i++ {
+		err := Utilities.WriteObject(file, newFileblock, int64(newSuperblock.S_block_start+i*int32(binary.Size(Structs.Fileblock{}))))
+		if err != nil {
+			fmt.Println("Error: ", err)
+		}
+	}
+
+	//Inode raiz - cuadrito azul
+	var Inode0 Structs.Inode //Inode 0 -> carpeta raiz
+	Inode0.I_uid = 1
+	Inode0.I_gid = 1
+	Inode0.I_size = 0
+	copy(Inode0.I_atime[:], date)
+	copy(Inode0.I_ctime[:], date)
+	copy(Inode0.I_mtime[:], date)
+	copy(Inode0.I_type[:], "0") //Carpetas
+	copy(Inode0.I_perm[:], "664")
+
+	fmt.Println("||||||||||--------------")
+	fmt.Println(Inode0.I_perm)
+	perm_u := strings.TrimRight(string(Inode0.I_perm[0]), "\x00")
+	fmt.Println("fddfd ", perm_u)
+	//MAS adelante explica porque sirve que sea -1
+	//Se inicializan todos sus apuntadores -1 porque aun no apuntan a nada
+	for i := int32(0); i < 15; i++ {
+		Inode0.I_block[i] = -1
+	}
+
+	//En su primer espacio se hace que apunte al primer bloque
+	//primer inodo (0) apunta a primer bloque (0)
+	Inode0.I_block[0] = 0
+
+	// . | 0
+	// .. | 0
+	// users.txt | 1
+	//
+
+	//Recrea el comentario de arriba (estructura)
+	var Folderblock0 Structs.Folderblock //Bloque 0 -> carpetas
+	//primero
+	Folderblock0.B_content[0].B_inodo = 0
+	copy(Folderblock0.B_content[0].B_name[:], ".")
+	//segundo
+	Folderblock0.B_content[1].B_inodo = 0
+	copy(Folderblock0.B_content[1].B_name[:], "..")
+	//tercero
+	Folderblock0.B_content[2].B_inodo = 1 //apunta al inodo numero 1 (se crea abajo)
+	copy(Folderblock0.B_content[2].B_name[:], "users.txt")
+	//Cuarto
+	Folderblock0.B_content[3].B_inodo = -1
+
+	var Inode1 Structs.Inode //Inode 1
+	Inode1.I_uid = 1
+	Inode1.I_gid = 1
+	Inode1.I_size = int32(binary.Size(Structs.Folderblock{}))
+	copy(Inode1.I_atime[:], date)
+	copy(Inode1.I_ctime[:], date)
+	copy(Inode1.I_mtime[:], date)
+	copy(Inode1.I_type[:], "1")
+	copy(Inode1.I_perm[:], "664")
+
+	for i := int32(0); i < 15; i++ {
+		Inode1.I_block[i] = -1
+	}
+
+	//Apunta al primer bloque
+	Inode1.I_block[0] = 1
+
+	data := "1,G,root\n1,U,root,root,123\n"
+	var Fileblock1 Structs.Fileblock //Bloque 1 -> archivo
+	copy(Fileblock1.B_content[:], data)
+
+	// Inodo 0 -> Bloque 0 -> Inodo 1 -> Bloque 1
+	// Crear la carpeta raiz /
+	// Crear el archivo users.txt "1,G,root\n1,U,root,root,123\n"
+
+	// write superblock
+	err := Utilities.WriteObject(file, newSuperblock, int64(partition.Start))
+
+	// write bitmap inodes
+	err = Utilities.WriteObject(file, byte(1), int64(newSuperblock.S_bm_inode_start))
+	err = Utilities.WriteObject(file, byte(1), int64(newSuperblock.S_bm_inode_start+1))
+
+	// write bitmap blocks
+	err = Utilities.WriteObject(file, byte(1), int64(newSuperblock.S_bm_block_start))
+	err = Utilities.WriteObject(file, byte(1), int64(newSuperblock.S_bm_block_start+1))
+
+	fmt.Println("Inode 0:", int64(newSuperblock.S_inode_start))
+	fmt.Println("Inode 1:", int64(newSuperblock.S_inode_start+int32(binary.Size(Structs.Inode{}))))
+
+	// write inodes
+	err = Utilities.WriteObject(file, Inode0, int64(newSuperblock.S_inode_start))                                     //Inode 0
+	err = Utilities.WriteObject(file, Inode1, int64(newSuperblock.S_inode_start+int32(binary.Size(Structs.Inode{})))) //Inode 1
+
+	// write blocks
+	err = Utilities.WriteObject(file, Folderblock0, int64(newSuperblock.S_block_start))                                       //Bloque 0
+	err = Utilities.WriteObject(file, Fileblock1, int64(newSuperblock.S_block_start+int32(binary.Size(Structs.Fileblock{})))) //Bloque 1
+
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
+
+	//mkfs -type=full -id=A119
+
+	fmt.Println("======End CREATE EXT3======")
 }

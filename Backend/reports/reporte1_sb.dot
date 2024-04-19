@@ -1,0 +1,76 @@
+digraph G {
+	a0 [shape=none label=<
+	<TABLE cellspacing="10" cellpadding="10" style="rounded" bgcolor="gray">
+		<tr>
+			<td colspan="2">Superbloque</td>
+		</tr>
+		<tr>
+			<td>FileSystemType</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>InodesCount</td>
+			<td>24347</td>
+		</tr>
+		<tr>
+			<td>BlocksCount</td>
+			<td>73041</td>
+		</tr>
+		<tr>
+			<td>Free_BlocksCount</td>
+			<td>73039</td>
+		</tr>
+		<tr>
+			<td>Free_InodesCount</td>
+			<td>24345</td>
+		</tr>
+		<tr>
+			<td>FechaMontaje</td>
+			<td>2024-04-15</td>
+		</tr>
+		<tr>
+			<td>Fecha Desmontaje</td>
+			<td>2024-04-15</td>
+		</tr>
+		<tr>
+			<td>Cantidad Montaje</td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td>Id system file</td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td>Inode size</td>
+			<td>128</td>
+		</tr>
+		<tr>
+			<td>Block size</td>
+			<td>5</td>
+		</tr>
+		<tr>
+			<td>Primer inodo Libre</td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td>Primer Bloque libre</td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td>Inicio Bitman Inodo</td>
+			<td>258</td>
+		</tr>
+		<tr>
+			<td>Inicio Bitman bloques</td>
+			<td>24605</td>
+		</tr>
+		<tr>
+			<td>Inicia Tabla inodos</td>
+			<td>97646</td>
+		</tr>
+		<tr>
+			<td>Inicia tabla bloques</td>
+			<td>3189715</td>
+		</tr>
+</TABLE>>];
+}

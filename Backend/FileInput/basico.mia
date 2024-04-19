@@ -111,20 +111,20 @@ unmount -id=B203 #-> id4
 #REPORTES---------------------------------------------------
 #DISCO 1 
 rep -id=A103 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte1.pdf -name=mbr
-rep -id=B103 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte2.pdf -name=disk
-rep -id=B103 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte3.pdf -name=mbr
+rep -id=A103 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte2.pdf -name=disk
+rep -id=A103 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte3.pdf -name=mbr
 #DISCO 2
 rep -id=B203 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte4.pdf -name=mbr
-rep -id=A203 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte5.pdf -name=disk
-rep -id=A203 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte6.pdf -name=mbr
+rep -id=B203 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte5.pdf -name=disk
+rep -id=B203 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte6.pdf -name=mbr
 #Disco 3
 rep -id=IDx -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte7.pdf -name=mbr #ERR ID NO ENCONTRADO
-rep -id=A303 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte8.pdf -name=disk
-rep -id=A303 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte9.pdf -name=mbr
+rep -id=C303 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte8.pdf -name=disk
+rep -id=C303 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte9.pdf -name=mbr
 #DISCO 5
 rep -id=IDx -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte10.pdf -name=mbr #ERR ID NO ENCONTRADO
-rep -id=A403 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte11.pdf -name=disk                                                                                                      
-rep -id=A403 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte12.pdf -name=mbr
+rep -id=E403 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte11.pdf -name=disk                                                                                                      
+rep -id=E403 -path=/home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/reports/reporte12.pdf -name=mbr
 
 
 

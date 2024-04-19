@@ -7,5 +7,9 @@ import (
 
 func main() {
 	fmt.Println("Hello World")
+	//Enrutador
+	// router := mux.NewRouter().StrictSlash(true)
+	// router.HandleFunc("/", )
+
 	analizer.Analize()
 }
