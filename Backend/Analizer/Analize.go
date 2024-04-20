@@ -26,18 +26,25 @@ func getCommandAndParams(input string) (string, string) {
 	return "", input
 }
 
-func Analize(input string) string {
-	fmt.Println("Ingrese comando: ")
-	command, params := getCommandAndParams(input)
-	if command != "" {
-		fmt.Println("Command: ", command, "Params: ", params)
-		return AnalyzeCommnad(strings.ToLower(command), params)
+func Analize() {
+	for true {
+		var input string
+		fmt.Println("Ingrese comando: ")
 
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+		input = scanner.Text()
+
+		command, params := getCommandAndParams(input)
+
+		if command != "" {
+			fmt.Println("Command: ", command, "Params: ", params)
+			AnalyzeCommnad(strings.ToLower(command), params)
+		}
 	}
-	return ""
 }
 
-func AnalyzeCommnad(command string, params string) string {
+func AnalyzeCommnad(command string, params string) {
 
 	if strings.Contains(command, "mkdisk") {
 		fn_mkdisk(params)
@@ -70,7 +77,7 @@ func AnalyzeCommnad(command string, params string) string {
 	} else if strings.Contains(command, "#") {
 		fmt.Println("Es un comentario")
 	} else if strings.Contains(command, "pause") {
-		return fn_pause()
+		fn_pause()
 	} else if strings.Contains(command, "cat") {
 		fn_cat(params)
 	} else if strings.Contains(command, "mkdir") {
@@ -80,7 +87,7 @@ func AnalyzeCommnad(command string, params string) string {
 	} else {
 		fmt.Println("Error: Command not found")
 	}
-	return ""
+
 }
 
 func AnalizerType(ruta_archivo string) {
@@ -198,17 +205,16 @@ func fn_cat(params string) {
 
 }
 
-func fn_pause() string {
+func fn_pause() {
 	fmt.Println("====== Start Pause ======")
 	fmt.Println("Presione ENTER para continuar")
 	reader := bufio.NewReader(os.Stdin)
 	_, err := reader.ReadString('\n')
 	if err != nil {
 		fmt.Println("Error al leer la entrada del usuario:", err)
-
-		return `{"mensaje": "Error al leer la entrad de usuario -PAUSE"}`
+		return
 	}
-	return `{"mensaje": "Terminar Pause"}`
+	fmt.Println("===== END Pause =====")
 }
 
 func fn_execute(params string) {
