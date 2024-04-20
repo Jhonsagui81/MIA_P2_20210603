@@ -18,5 +18,5 @@ func main() {
 }
 
 func InputCommand(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Si llego el comando")
+	fmt.Fprintf(w, "Si llesdsdgo el comando")
 }
