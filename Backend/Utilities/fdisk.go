@@ -30,6 +30,22 @@ func BusquedaArchivo(letter string) bool {
 	return encontrado
 }
 
+func ObtenerParticiones(file *os.File, TempMBR Structs.MRB) []Structs.Command {
+	particiones := []Structs.Command{}
+	for i := 0; i < 4; i++ {
+		if TempMBR.Partitions[i].Size != 0 {
+			if string(TempMBR.Partitions[i].Status[:]) == "1" {
+				//Montada
+				nombre_particion := strings.TrimRight(string(TempMBR.Partitions[i].Id[:]), "\x00")
+				particion := Structs.Command{Nombre: nombre_particion, Id: i}
+				particiones = append(particiones, particion)
+			}
+
+		}
+	}
+	return particiones
+}
+
 func RecorridoParticionesDisco(file *os.File, nombre_comparar string, TempMBR Structs.MRB) bool {
 	Se_repite := false
 	for i := 0; i < 4; i++ {

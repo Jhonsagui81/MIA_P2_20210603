@@ -17,7 +17,7 @@ func CreateFile(name string) error {
 	//Ensure the directory exists
 	dir := filepath.Dir(name)
 	if err := os.MkdirAll(dir, os.ModePerm); err != nil {
-		fmt.Println("Err CreateFile dir==", err)
+		// fmt.Println("Err CreateFile dir==", err)
 		return err
 	}
 
@@ -25,7 +25,7 @@ func CreateFile(name string) error {
 	if _, err := os.Stat(name); os.IsNotExist(err) {
 		file, err := os.Create(name) //si no existe el archivo, lo crea
 		if err != nil {
-			fmt.Println("Err CreateFile create==", err)
+			// fmt.Println("Err CreateFile create==", err)
 			return err
 		}
 		defer file.Close()
@@ -37,7 +37,7 @@ func CreateFile(name string) error {
 func OpenFile(name string) (*os.File, error) {
 	file, err := os.OpenFile(name, os.O_RDWR, 0644)
 	if err != nil {
-		fmt.Println("Err OpenFile==", err)
+		// fmt.Println("Err OpenFile==", err)
 		return nil, err
 	}
 	return file, nil
@@ -59,7 +59,7 @@ func ReadObject(file *os.File, data interface{}, position int64) error {
 	file.Seek(position, 0)
 	err := binary.Read(file, binary.LittleEndian, data)
 	if err != nil {
-		fmt.Println("Err ReadObject==", err)
+		// fmt.Println("Err ReadObject==", err)
 		return err
 	}
 	// fmt.Println("Error lecura??: ", err)
@@ -74,14 +74,14 @@ func NumeroRandom() int {
 func CrearGrafo(text string, pathDot string, pathPDF string) {
 	err := CreateFile(pathDot)
 	if err != nil {
-		fmt.Println("Error: Creacion archivo para grafo MBR ", err)
+		// fmt.Println("Error: Creacion archivo para grafo MBR ", err)
 		return
 	}
 
 	//apertura de archivo
 	archivo, err := os.OpenFile(pathDot, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 	if err != nil {
-		fmt.Println("apertura:", err)
+		// fmt.Println("apertura:", err)
 		return
 	}
 	defer archivo.Close()
@@ -90,7 +90,7 @@ func CrearGrafo(text string, pathDot string, pathPDF string) {
 	// fmt.Println(text)
 	_, err = io.WriteString(archivo, text)
 	if err != nil {
-		fmt.Println("Escritura:", err)
+		// fmt.Println("Escritura:", err)
 		return
 	}
 
@@ -102,7 +102,7 @@ func CrearGrafo(text string, pathDot string, pathPDF string) {
 	cmd.Stderr = &stderr
 	err = cmd.Run()
 	if err != nil {
-		fmt.Println("Transformacion:", err)
+		// fmt.Println("Transformacion:", err)
 		fmt.Println(string(stderr.Bytes()))
 		return
 	}

@@ -9,4 +9,12 @@ const Button = (props) =>{
     )
 }
 
+const Opcion = ({ nombre, onClick }) => {
+    return (
+      <button className="py-2 px-4 rounded" onClick={onClick}>
+        {nombre}
+      </button>
+    );
+  };
+
 export default Button

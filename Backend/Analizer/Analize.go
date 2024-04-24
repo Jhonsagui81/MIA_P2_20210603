@@ -27,20 +27,16 @@ func getCommandAndParams(input string) (string, string) {
 }
 
 func Analize(input string) string {
-	fmt.Println("Ingrese comando: ")
+	// fmt.Println("Ingrese comando: ")
 	command, params := getCommandAndParams(input)
-	if command != "" {
-		fmt.Println("Command: ", command, "Params: ", params)
-		return AnalyzeCommnad(strings.ToLower(command), params)
-
-	}
-	return ""
+	// fmt.Println("Command: ", command, "Params: ", params)
+	return AnalyzeCommnad(strings.ToLower(command), params)
 }
 
 func AnalyzeCommnad(command string, params string) string {
 
 	if strings.Contains(command, "mkdisk") {
-		fn_mkdisk(params)
+		return fn_mkdisk(params)
 	} else if strings.Contains(command, "rmdisk") {
 		fn_rmdisk(params)
 	} else if strings.Contains(command, "fdisk") {
@@ -199,16 +195,16 @@ func fn_cat(params string) {
 }
 
 func fn_pause() string {
-	fmt.Println("====== Start Pause ======")
-	fmt.Println("Presione ENTER para continuar")
+	// fmt.Println("====== Start Pause ======")
+	// fmt.Println("Presione ENTER para continuar")
 	reader := bufio.NewReader(os.Stdin)
 	_, err := reader.ReadString('\n')
 	if err != nil {
 		fmt.Println("Error al leer la entrada del usuario:", err)
 
-		return `{"mensaje": "Error al leer la entrad de usuario -PAUSE"}`
+		return "Error al leer la entrad de usuario -PAUSE"
 	}
-	return `{"mensaje": "Terminar Pause"}`
+	return "Terminar Pause"
 }
 
 func fn_execute(params string) {
@@ -230,7 +226,7 @@ func fn_execute(params string) {
 	AnalizerType(path)
 }
 
-func fn_mkdisk(params string) {
+func fn_mkdisk(params string) string {
 	// Define flags
 	size := 0
 	unit := "m"
@@ -267,11 +263,12 @@ func fn_mkdisk(params string) {
 
 	// Call the function
 	if flags {
-		mkdisk(size, unit, fit)
+		return mkdisk(size, unit, fit)
 	} else {
-		fmt.Println("Error: Parametros no validos -MKDISK")
+		// fmt.Println("Error: Parametros no validos -MKDISK")
 	}
 
+	return "Error: Parametros no validos -MKDISK"
 }
 
 func fn_rmdisk(params string) {

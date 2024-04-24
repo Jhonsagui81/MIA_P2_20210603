@@ -1,0 +1,7 @@
+#ignorar archivos binarios y ejecutables
+*.exe
+*.dll
+*.o
+
+#Ignorar la carpeta de discos
+MIA/

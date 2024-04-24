@@ -450,28 +450,28 @@ func fdisk(size int, unit string, letter string, name string, type_ string, fit 
 	fmt.Println("======End FDISK======")
 }
 
-func mkdisk(size int, unit string, fit string) {
-	fmt.Println("======Start MKDISK======")
-	fmt.Println("Size:", size)
-	fmt.Println("Unit:", unit)
-	fmt.Println("Unit:", fit)
+func mkdisk(size int, unit string, fit string) string {
+	// fmt.Println("======Start MKDISK======")
+	// fmt.Println("Size:", size)
+	// fmt.Println("Unit:", unit)
+	// fmt.Println("Unit:", fit)
 
 	// validate size > 0
 	if size <= 0 {
-		fmt.Println("Error: Size must be greater than 0")
-		return
+		// fmt.Println("Error: Size must be greater than 0")
+		return "Error: Size must be greater than 0"
 	}
 
 	// validate unit equals to k/m
 	if unit != "k" && unit != "m" {
-		fmt.Println("Error: Unit must be k or m")
-		return
+		// fmt.Println("Error: Unit must be k or m")
+		return "Error: Unit must be k or m"
 	}
 
 	// Validate fit equals to BF/FF/WF
 	if fit != "bf" && fit != "ff" && fit != "wf" {
-		fmt.Println("Error: Fit must be bf, ff or wf")
-		return
+		// fmt.Println("Error: Fit must be bf, ff or wf")
+		return "Error: Fit must be bf, ff or wf"
 	}
 
 	// Create file
@@ -481,8 +481,8 @@ func mkdisk(size int, unit string, fit string) {
 	ContadorArchivos++
 	Letra_Disco++
 	if err != nil {
-		fmt.Println("Error: ", err)
-		return
+		// fmt.Println("Error: ", err)
+		return "Error: "
 	}
 
 	// Set the size in bytes
@@ -495,8 +495,8 @@ func mkdisk(size int, unit string, fit string) {
 	// Open bin file
 	file, err := Utilities.OpenFile(nombre_archivo)
 	if err != nil {
-		fmt.Println("Error: No se pudo abrir el archivo -MKDISK")
-		return
+		// fmt.Println("Error: No se pudo abrir el archivo -MKDISK")
+		return "Error: No se pudo abrir el archivo -MKDISK"
 	}
 
 	// Write 0 binary data to the file
@@ -506,8 +506,8 @@ func mkdisk(size int, unit string, fit string) {
 	}
 	for i := 0; i < size/1024; i++ {
 		if _, err := file.Write(kb); err != nil {
-			fmt.Println("Error: No puedo con los ceros", err)
-			return
+			// fmt.Println("Error: No puedo con los ceros", err)
+			return "Error: No puedo con los ceros"
 		}
 	}
 
@@ -524,14 +524,15 @@ func mkdisk(size int, unit string, fit string) {
 
 	// Write object in bin file
 	if err := Utilities.WriteObject(file, newMRB, 0); err != nil {
-		fmt.Println("Error: no se pudo escribir archivo.  -MKDISK")
-		return
+		// fmt.Println("Error: no se pudo escribir archivo.  -MKDISK")
+		return "Error: no se pudo escribir archivo.  -MKDISK"
 	}
 
 	// Close bin file
 	defer file.Close()
 
-	fmt.Println("======End MKDISK======")
+	// fmt.Println("======End MKDISK======")
+	return "MKDISk Finalizado Correctamente..."
 }
 
 func rmdisk(letter string) {

@@ -1,22 +1,11 @@
 package Structs
 
-import (
-	"fmt"
-)
-
 type MRB struct {
 	MbrSize      int32
 	CreationDate [10]byte
 	Signature    int32
 	Fit          [2]byte
 	Partitions   [4]Partition
-}
-
-func PrintMBR(data MRB) {
-	fmt.Println(fmt.Sprintf("CreationDate: %s, fit: %s, size: %d", string(data.CreationDate[:]), string(data.Fit[:]), data.MbrSize))
-	for i := 0; i < 4; i++ {
-		fmt.Println(fmt.Sprintf("Name:%s, tipo:%s, fit:%s, start:%d, size:%d, status:%s, id:%s, corre:%d", string(data.Partitions[i].Name[:]), string(data.Partitions[i].Type[:]), string(data.Partitions[i].Fit[:]), data.Partitions[i].Start, data.Partitions[i].Size, string(data.Partitions[i].Status[:]), string(data.Partitions[i].Id[:]), data.Partitions[i].Correlative))
-	}
 }
 
 type Partition struct {
@@ -119,4 +108,15 @@ type UserTXT struct {
 	Grupo string
 	User  string
 	Pass  string
+}
+
+type Command struct {
+	Nombre string `json: "Nombre"`
+	Id     int    `json:"ID"`
+}
+
+type Discos []Command
+
+type RespuestaFron struct {
+	Respuesta string `json: "Respuesta"`
 }
