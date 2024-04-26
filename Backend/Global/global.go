@@ -85,6 +85,10 @@ func InfoUsuario() int32 {
 
 }
 
+func DataLogin() (string, string, string) {
+	return usuario.User, usuario.Pass, usuario.IdCompleto
+}
+
 func InfoGrupo() int32 {
 	idG, err := strconv.Atoi(usuario.GID)
 	if err != nil {

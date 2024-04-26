@@ -87,6 +87,7 @@ func Mkdir(path string, r bool) {
 					indiceLastCoincidencia := int32(0)
 					creadas := ""
 					for _, folder := range StepsPath {
+						folder = strings.Replace(folder, " ", "", -1)
 						var tempSuperblock Structs.Superblock
 						// Read object from bin file
 						if err := Utilities.ReadObject(file, &tempSuperblock, int64(TempMBR.Partitions[PartitionStart].Start)); err != nil {
@@ -150,7 +151,10 @@ func Mkdir(path string, r bool) {
 				//no es en la carpeta raiz
 				indexInode := UtilitiesInodes.InitSearch(path, file, tempSuperblock)
 				if indexInode != -1 {
-					fmt.Println("FI xd")
+					fmt.Println("Carpeta ya existe xd")
+				} else {
+					//quitar la carpeta a crear y buscar la ruta para verificar qur
+					//Todas las carpetas existen
 				}
 			} else {
 				//la nueva carpeta va en la raiz

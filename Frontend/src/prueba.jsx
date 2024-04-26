@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Pantalla1 from './components/pantalla1';
 import Pantalla2 from './components/pantalla2';
+import Pantalla3 from './components/pantalla3';
 
 const Menu = () => {
   const [pantallaActiva, setPantallaActiva] = useState('Pantalla1');
@@ -29,18 +30,6 @@ const Menu = () => {
 
 
 
-const Pantalla3 = () => {
-  return (
-    <div className="p-4">
-      <h2>Contenido de la Pantalla 3</h2>
-      src/components/disco2.jpeg
-      src/components/disco2.jpeg
-      /home/jhonatan/Documentos/jfasjdfa/PROYECTO1_MIA/Frontend/src/components/disco2.jpeg
-      <img src='https://cdn-icons-png.flaticon.com/512/689/689331.png'/>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </div>
-  );
-};
 
 const Salida = () => {
   return (

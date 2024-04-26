@@ -16,7 +16,7 @@ var ContadorArchivos int
 var Letra_Disco = 'A'
 var re = regexp.MustCompile(`-(\w+)=("[^"]+"|\S+)`)
 
-func getCommandAndParams(input string) (string, string) {
+func GetCommandAndParams(input string) (string, string) {
 	parts := strings.Fields(input)
 	if len(parts) > 0 {
 		command := strings.ToLower(parts[0])
@@ -28,7 +28,7 @@ func getCommandAndParams(input string) (string, string) {
 
 func Analize(input string) string {
 	// fmt.Println("Ingrese comando: ")
-	command, params := getCommandAndParams(input)
+	command, params := GetCommandAndParams(input)
 	// fmt.Println("Command: ", command, "Params: ", params)
 	return AnalyzeCommnad(strings.ToLower(command), params)
 }
@@ -101,7 +101,7 @@ func AnalizerType(ruta_archivo string) {
 		regex := regexp.MustCompile(`#.*S`)
 		lineaSinComentario := regex.ReplaceAllString(line, "")
 
-		command, params := getCommandAndParams(lineaSinComentario)
+		command, params := GetCommandAndParams(lineaSinComentario)
 		if command != "" {
 			fmt.Println("Command: ", command, "Params: ", params)
 			AnalyzeCommnad(strings.ToLower(command), params)

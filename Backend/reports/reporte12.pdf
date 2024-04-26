@@ -1,0 +1,173 @@
+digraph G {
+	a0 [shape=none label=<
+	<TABLE cellspacing="10" cellpadding="10" style="rounded" bgcolor="red">
+	<TR>
+	<TD bgcolor="yellow">REPORTE MBR</TD>
+	</TR>
+
+	<TR>
+	<TD bgcolor="yellow">mbr_tamano</TD>
+	<TD bgcolor="yellow">20971520</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">mbr_fecha_creatopm</TD>
+	<TD bgcolor="yellow">2024-04-25</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">mbr_disk_signature</TD>
+	<TD bgcolor="yellow">4</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">PARTICION</TD>
+	</TR>
+
+	<TR>
+	<TD bgcolor="yellow">part_status</TD>
+	<TD bgcolor="yellow">0</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_type</TD>
+	<TD bgcolor="yellow">e</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_fit</TD>
+	<TD bgcolor="yellow">bf</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_start</TD>
+	<TD bgcolor="yellow">164</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_size</TD>
+	<TD bgcolor="yellow">5242880</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_name</TD>
+	<TD bgcolor="yellow">part29</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">PARTICION_LOGICA</TD>
+	</TR>
+
+	<TR>
+	<TD bgcolor="yellow">part_next</TD>
+	<TD bgcolor="yellow">1048771</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_fit</TD>
+	<TD bgcolor="yellow">bf</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_start</TD>
+	<TD bgcolor="yellow">195</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_size</TD>
+	<TD bgcolor="yellow">1048576</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_name</TD>
+	<TD bgcolor="yellow">part30</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">PARTICION_LOGICA</TD>
+	</TR>
+
+	<TR>
+	<TD bgcolor="yellow">part_next</TD>
+	<TD bgcolor="yellow">2097378</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_fit</TD>
+	<TD bgcolor="yellow">bf</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_start</TD>
+	<TD bgcolor="yellow">1048802</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_size</TD>
+	<TD bgcolor="yellow">1048576</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_name</TD>
+	<TD bgcolor="yellow">part32</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">PARTICION_LOGICA</TD>
+	</TR>
+
+	<TR>
+	<TD bgcolor="yellow">part_next</TD>
+	<TD bgcolor="yellow">3145985</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_fit</TD>
+	<TD bgcolor="yellow">bf</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_start</TD>
+	<TD bgcolor="yellow">2097409</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_size</TD>
+	<TD bgcolor="yellow">1048576</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_name</TD>
+	<TD bgcolor="yellow">part33</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">PARTICION_LOGICA</TD>
+	</TR>
+
+	<TR>
+	<TD bgcolor="yellow">part_next</TD>
+	<TD bgcolor="yellow">-1</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_fit</TD>
+	<TD bgcolor="yellow">bf</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_start</TD>
+	<TD bgcolor="yellow">3146016</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_size</TD>
+	<TD bgcolor="yellow">1048576</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_name</TD>
+	<TD bgcolor="yellow">part34</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">PARTICION</TD>
+	</TR>
+
+	<TR>
+	<TD bgcolor="yellow">part_status</TD>
+	<TD bgcolor="yellow">1</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_type</TD>
+	<TD bgcolor="yellow">p</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_fit</TD>
+	<TD bgcolor="yellow">bf</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_start</TD>
+	<TD bgcolor="yellow">5243044</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_size</TD>
+	<TD bgcolor="yellow">5242880</TD>
+	</TR>
+	<TR>
+	<TD bgcolor="yellow">part_name</TD>
+	<TD bgcolor="yellow">part31</TD>
+	</TR>
+	</TABLE>>];
+}

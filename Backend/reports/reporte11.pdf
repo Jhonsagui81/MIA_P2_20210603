@@ -1,0 +1,7 @@
+digraph D {
+	subgraph cluster_0 {
+		bgcolor="#68d9e2"
+		node [style="rounded" style=filled];
+		node_A [shape=record   label="MBR\n0.000782|{Extendida|{EBR\n0.000148|Logica\n5.000000|EBR\n0.000148|Logica\n5.000000|EBR\n0.000148|Logica\n5.000000|EBR\n0.000148|Logica\n5.000000|Libre\n4.998627}}|part31\n25.000000|Libre\n49.999218"];
+	}
+}

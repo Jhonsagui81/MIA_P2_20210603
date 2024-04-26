@@ -1,4 +1,4 @@
-#ENTRADA SEGUNDA PARTE MIA
+#ENTRADA SEGUNDA PARTE MIA \\n
 #Seccion A - Sergie Arizandieta
 #1S 2024
 #CAMBIAR /home/serchiboi -> POR SU USUARIO EJ ->  /home/SU_USER 
@@ -150,3 +150,10 @@ logout
 
 login -user=root -pass=123 -id=A103
 
+//PNDIENTES
+meter el archivo de un solo putazoa - (hacer que se limpien los cuadros con cada envio)
+verificar si se crear las carpetas si no aplicarle -r a todos
+verificar en la pagina la creacion de los archivos y carpetas
+mejorar la autenticacion de login
+ver pantalla 3 -> reportes
+subirlo a la nube 

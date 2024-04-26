@@ -115,8 +115,13 @@ type Command struct {
 	Id     int    `json:"ID"`
 }
 
-type Discos []Command
-
 type RespuestaFron struct {
 	Respuesta string `json: "Respuesta"`
+}
+
+type Contenido struct {
+	Nombre  string `json: "Nombre"`
+	Content string `json: "Content"`
+	Imagen  string `json: "Imagen"`
+	Id      int    `json: "Id"`
 }
