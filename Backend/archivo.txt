@@ -1,1 +1,1 @@
-mkdir  -path=/clific
+mkdir -r -path=/hola/mundo

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import axios from 'axios'
 import Partition from "./pantallaPartition";
 
-const Pantalla2 = () => {
+const Pantalla2 = ({ip}) => {
     //recorrer el arreglo de discos
     const [discos, setDiscos] = useState([]);
     //Disco seleccionado 
@@ -20,7 +20,7 @@ const Pantalla2 = () => {
     //Para pedir discos 
     useEffect(() => {
         // Carga los datos del backend al montarse la pantalla
-        axios.get('http://localhost:3000/discos') // Ajusta la URL del endpoint
+        axios.get(`http://${ip}:3000/discos`) // Ajusta la URL del endpoint
         // .then((response) => console.log(response.data))  
         .then((response) => setDiscos(response.data))
           
@@ -30,7 +30,7 @@ const Pantalla2 = () => {
     //Para Pedir particiones  
     const handleCardClick = (nombreDisco) => {
         console.log(`**Se hizo clic en la tarjeta con nombre: ${nombreDisco}**`);
-        axios.post('http://localhost:3000/partitions', {Nombre: nombreDisco})
+        axios.post(`http://${ip}:3000/partitions`, {Nombre: nombreDisco})
             .then((response) => {
                 console.log('Petición POST exitosa:', response.data);
                 setShowDetalle("particion")
@@ -50,7 +50,7 @@ const Pantalla2 = () => {
         const comand = "login -user="+username+" -pass="+password+" -id="+selectedPartition
 
         //Hacer peticion post
-        axios.post('http://localhost:3000/login', {Nombre: comand})
+        axios.post(`http://${ip}:3000/login`, {Nombre: comand})
         .then((response) =>{
             setShowDetalle("sistema")
             setArchivos(response.data)
@@ -64,7 +64,7 @@ const Pantalla2 = () => {
     }
 
     function handleDesconectar(){
-        axios.post('http://localhost:3000/comand', {Nombre: "logout"})
+        axios.post(`http://${ip}:3000/comand`, {Nombre: "logout"})
         .then((response) => {
             setShowDetalle("disco")
 
@@ -90,7 +90,7 @@ const Pantalla2 = () => {
         console.log(ruta+nombre)
         //preparar la ruta peticion (ya seria ruta -> hacer un console.log)
         //hacer una peticion mandandole la ruta
-        axios.post('http://localhost:3000/sistema', {Nombre: ruta+nombre})
+        axios.post(`http://${ip}:3000/sistema`, {Nombre: ruta+nombre})
         .then((response) => {
             setArchivos(response.data)
             response.data.forEach((obj) => {
@@ -127,7 +127,7 @@ const Pantalla2 = () => {
         if (nuevaRuta2.length === 0) {
             console.log(ruta)
             setRuta("/")
-            axios.post('http://localhost:3000/sistema', {Nombre: "/"})
+            axios.post(`http://${ip}:3000/sistema`, {Nombre: "/"})
             .then ((response) => {
                 setArchivos(response.data)
             
@@ -139,7 +139,7 @@ const Pantalla2 = () => {
             })
         } else {
             console.log(ruta)
-            axios.post('http://localhost:3000/sistema', {Nombre: nuevaRuta2})
+            axios.post(`http://${ip}:3000/sistema`, {Nombre: nuevaRuta2})
             .then ((response) => {
                 setArchivos(response.data)
             

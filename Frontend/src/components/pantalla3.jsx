@@ -2,14 +2,14 @@ import React, {useState, useEffect} from "react";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios'
 
-const Pantalla3 = () => {
+const Pantalla3 = ({ip}) => {
     const [showDetalle, setShowDetalle] = useState('pdf');
     const [contenidoPdf, setContenidoPdf] = useState('')
     const [RespuestaBackend, setRespuestaBackend] = useState([])
 
     useEffect(() => {
         // Carga los datos del backend al montarse la pantalla
-        axios.get('http://localhost:3000/reportes') // Ajusta la URL del endpoint
+        axios.get(`http://${ip}:3000/reportes`) // Ajusta la URL del endpoint
         // .then((response) => console.log(response.data))  
         .then((response) => setRespuestaBackend(response.data))
           

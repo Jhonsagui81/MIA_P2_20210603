@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import axios from 'axios'
 
-const Pantalla1 = () => {
+const Pantalla1 = ({ip}) => {
     const [Nombre, setNombre] = useState('');
     const [RespuestaBackend, setRespuestaBackend] = useState('')
 
     const handleSubmit = async () => {
         try{
-            const url = "http://localhost:3000/input"
+            const url = `http://${ip}:3000/input`
             console.log("Enviando al backend:", {Nombre})
             const response = await axios.post(url, {Nombre});
             console.log(response)
@@ -18,6 +18,7 @@ const Pantalla1 = () => {
         }
     }
 
+      //http://localhost:3000
 
     return (
         <div className="p-4">
