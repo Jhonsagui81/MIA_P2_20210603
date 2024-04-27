@@ -74,14 +74,14 @@ func NumeroRandom() int {
 func CrearGrafo(text string, pathDot string, pathPDF string) {
 	err := CreateFile(pathDot)
 	if err != nil {
-		// fmt.Println("Error: Creacion archivo para grafo MBR ", err)
+		fmt.Println("Error: Creacion archivo para grafo MBR ", err)
 		return
 	}
 
 	//apertura de archivo
 	archivo, err := os.OpenFile(pathDot, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 	if err != nil {
-		// fmt.Println("apertura:", err)
+		fmt.Println("apertura -CREA Grafo:", err)
 		return
 	}
 	defer archivo.Close()

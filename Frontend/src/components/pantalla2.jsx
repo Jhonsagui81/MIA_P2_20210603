@@ -43,18 +43,28 @@ const Pantalla2 = ({ip}) => {
 
     //Para hacer el post del login
     function handleLoginClick(){
-        
-        
-
         //Construir el comando
         const comand = "login -user="+username+" -pass="+password+" -id="+selectedPartition
 
         //Hacer peticion post
         axios.post(`http://${ip}:3000/login`, {Nombre: comand})
         .then((response) =>{
-            setShowDetalle("sistema")
-            setArchivos(response.data)
-            console.log('Petición POST exitosa:', response.data);
+
+
+          setArchivos(response.data)
+          response.data.forEach((obj) => {
+              if (obj.Id == -1) {
+                console.log('Problema con el login.');
+                setShowDetalle("login")
+                window.alert(obj.Content)
+
+              } else {
+                setShowDetalle("sistema")
+                setArchivos(response.data)
+                console.log('Petición POST exitosa:', response.data);
+
+              }
+          });
             //Respondera con los archivos y carpetas de la carpeta root-> Guardarla en un arreglo como discos
 
         })

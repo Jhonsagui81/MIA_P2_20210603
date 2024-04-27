@@ -19,11 +19,20 @@ func rep(name string, path string, id string, ruta string) {
 	fmt.Println("id", id)
 	fmt.Println("ruta:", ruta)
 	//Transformacio a dot
-	pathdot := path[:len(path)-3]
-	pathdot += "dot"
+	pdot := path[:len(path)-3]
+	pdot += "dot"
+	//Extrayendo la ultima parte
+	partesDot := strings.Split(pdot, "/")
+	ultimaParte := partesDot[len(partesDot)-1]
+	pathdot := "./reports/" + string(ultimaParte)
+
 	//Transformarlo a pdf
-	pathPDF := path[:len(path)-3]
-	pathPDF += "pdf"
+	pPDF := path[:len(path)-3]
+	pPDF += "pdf"
+	//Extrayendo la ultima parte
+	partesPDF := strings.Split(pPDF, "/")
+	ultimaPartePDf := partesPDF[len(partesPDF)-1]
+	pathPDF := "./reports/" + string(ultimaPartePDf)
 
 	switch name {
 	case "mbr":

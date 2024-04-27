@@ -1,0 +1,7 @@
+digraph D {
+	subgraph cluster_0 {
+		bgcolor="#68d9e2"
+		node [style="rounded" style=filled];
+		node_A [shape=record   label="MBR\n0.000261|part1\n33.333336|part2\n16.666668|part3\n16.666668|part4\n16.666668|Libre\n16.666407"];
+	}
+}

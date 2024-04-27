@@ -60,7 +60,7 @@ func main() {
 
 func GetReportes(w http.ResponseWriter, r *http.Request) {
 	var reportes []Structs.Contenido
-	archivos, err := ioutil.ReadDir("/home/jhonatan/archivos/reports")
+	archivos, err := ioutil.ReadDir("./reports")
 	if err != nil {
 		fmt.Println("Error: No se puedo acceder a los discos ", err)
 	}
@@ -70,7 +70,7 @@ func GetReportes(w http.ResponseWriter, r *http.Request) {
 			nombre := archivo.Name()
 			idd := len(reportes) + 1
 			//Transformar el contenido
-			file, err := ioutil.ReadFile("/home/jhonatan/archivos/reports/" + archivo.Name())
+			file, err := ioutil.ReadFile("./reports/" + archivo.Name())
 			if err != nil {
 				fmt.Println("Error leer pdf")
 			}
@@ -183,22 +183,41 @@ func Login(w http.ResponseWriter, r *http.Request) {
 			}
 
 		}
-		//FUncion para obtener los archivos raiz
-		archivos := BusquedaRuta(user, pass, id, "/")
-		w.Header().Set("Content-Type", "application/json") //tipo de dato se enviara
-		w.WriteHeader(http.StatusCreated)
-		fmt.Println("envia a:", archivos)
-		json.NewEncoder(w).Encode(archivos)
+		//Ya se valido que hay sesion iniciada, pero hay que validar si es la de los datos mandados
+		userG, passG, idG := global.DataLogin()
+		if userG == user && passG == pass && idG == id {
+			//FUncion para obtener los archivos raiz
+			archivos := BusquedaRuta(user, pass, id, "/")
+			w.Header().Set("Content-Type", "application/json") //tipo de dato se enviara
+			w.WriteHeader(http.StatusCreated)
+			fmt.Println("envia a:", archivos)
+			json.NewEncoder(w).Encode(archivos)
+		} else {
+			var archivos []Structs.Contenido
+			var arch Structs.Contenido
+			arch.Id = -1
+			arch.Content = "Sesion Iniciada - Deslogee para iniciar sesion"
+			archivos = append(archivos, arch)
+			w.Header().Set("Content-Type", "application/json") //tipo de dato se enviara
+			w.WriteHeader(http.StatusCreated)
+			fmt.Println("envia a:", archivos)
+			json.NewEncoder(w).Encode(archivos)
+		}
+		//si coinciden -> hacer el codigo de abajo
+		//SI no coincide -> devolver json con id -1 y validar en el frontend
 
 	} else {
 		//No hay usuario logeado
 		//fallo en el login -> no cambiar de ventana (mostrar error ingrese datos correctos)
-		var archivo Structs.Contenido
-		archivo.Nombre = ""
+		var archivos []Structs.Contenido
+		var arch Structs.Contenido
+		arch.Id = -1
+		arch.Content = "Usuario o Contrasena incorrecto"
+		archivos = append(archivos, arch)
 		w.Header().Set("Content-Type", "application/json") //tipo de dato se enviara
 		w.WriteHeader(http.StatusCreated)
-		fmt.Println("envia a:", archivo)
-		json.NewEncoder(w).Encode(archivo)
+		fmt.Println("envia a:", archivos)
+		json.NewEncoder(w).Encode(archivos)
 	}
 
 }
